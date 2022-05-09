@@ -6,13 +6,19 @@ using World;
 
 namespace Goal
 {
-    public class CGoal
+    public class CGoal : MonoBehaviour
     {
         public int important = 1;
-        public string name = "SomeGoal";
-        public List<CFact> goals;
+        public string goalName = "SomeGoal";
         public bool deletable = true;
+        
+        public List<CFact> goals;
 
+
+        public void Awake()
+        {
+            goals = new List<CFact>();
+        }
 
         public CGoal() {}
 
@@ -22,6 +28,7 @@ namespace Goal
             this.important = i;
             this.deletable = d;
         }
+
         public bool IsSatified()
         {
             foreach (CFact goal in goals)
