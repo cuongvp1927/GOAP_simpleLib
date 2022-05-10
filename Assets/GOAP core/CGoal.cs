@@ -20,16 +20,17 @@ namespace Goal
             goals = new List<CFact>();
         }
 
-        public CGoal() {}
+        //public CGoal() {}
 
-        public CGoal(string n, int i, bool d)
-        {
-            this.name = n;
-            this.important = i;
-            this.deletable = d;
-        }
+        //public CGoal(string n, int i, bool d)
+        //{
+        //    this.name = n;
+        //    this.important = i;
+        //    this.deletable = d;
+        //}
 
-        public bool IsSatified()
+        // Function to check if goal is satisfied
+        public virtual bool IsSatified()
         {
             foreach (CFact goal in goals)
             {

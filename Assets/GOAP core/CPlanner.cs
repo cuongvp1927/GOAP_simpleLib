@@ -8,6 +8,12 @@ using World;
 
 namespace Planner
 {
+    class Node
+    {
+        Node parent;
+        CActionBase action;
+    }
+
     public class CPlanner
     {
         public Queue<CActionBase> Plan(CGoal goal, List<CActionBase> actionList, List<CFact> belief)

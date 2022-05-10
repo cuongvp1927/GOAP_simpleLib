@@ -57,6 +57,20 @@ public class CAgent : MonoBehaviour
         goalBlacklist = new List<CGoal>();
     }
 
+    // Called after t time to reset blacklist back to goal list
+    protected virtual void ResetBlackList()
+    {
+        foreach (CGoal g in goalBlacklist)
+        {
+            if (!goalList.Contains(g))
+            {
+                goalList.Add(g);
+            }
+            goalBlacklist.Remove(g);
+        }
+    }
+
+    // Function to create a new plan (action queue)
     protected virtual void MakeNewPlan()
     {
         planner = new CPlanner();
@@ -88,7 +102,13 @@ public class CAgent : MonoBehaviour
         // Check if currently running any action
         if ((currentAction != null) && (currentAction.isActive))
         {
-
+            // Check if the current action has complete yet?
+            if (currentAction.isComplete)
+            {
+                // Do pos calculation and switch to the next action
+                currentAction.Pos_Perform();
+                currentAction.isActive = false;
+            }
         }
         else
         {
@@ -98,14 +118,17 @@ public class CAgent : MonoBehaviour
                 // Check if goal is satified
                 if (currentGoal.IsSatified())
                 {
+                    // If goal is satisfied and non repeat, remove from the goal list
                     if (currentGoal.deletable)
                     {
                         goalList.Remove(currentGoal);
                     }
+                    // And then find a new goal
                     MakeNewPlan();
                 }
 
-                // Check if done all action is finished but not satisfied
+                // Check if done all action is finished but not satisfied, this mean the goal must not been able to complete
+                // If this happen, temporary remove to the blacklist, so that after T time, be put back to the list.
                 if (actionQueue.Count <= 0)
                 {
                     goalList.Remove(currentGoal);
@@ -115,6 +138,12 @@ public class CAgent : MonoBehaviour
 
                 // Take 1 action from the plan queue, and execute it.
                 currentAction = actionQueue.Dequeue();
+                Debug.Log("Currently performing: " + currentAction.actionName);
+                if (currentAction.Pre_Perform())
+                {
+                    currentAction.isActive = true;
+                    currentAction.PerformAction();
+                }
             }
         }
     }

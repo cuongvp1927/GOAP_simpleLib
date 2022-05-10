@@ -19,14 +19,30 @@ namespace Action {
         public bool isInteruptable = false;
         public bool forceReplan = false;
 
+        public bool isComplete;
+        public bool isFail;
+
         public void Awake()
         {
             pre_conditions = new List<CFact>();
             effects = new List<CFact>();
+
+            isComplete = false;
+            isFail = false;
         }
 
-        public abstract void PerformAction();
-        public abstract void Pre_Perform();
-        public abstract void Pos_Perform();
+        // Main action, required
+        public abstract bool PerformAction();
+        // Pre calculation if needed, return true to start performing the action.
+        public virtual bool Pre_Perform()
+        {
+            return true;
+        }
+        // Pos calculation if needed.
+        public virtual bool Pos_Perform()
+        {
+            isFail = false;
+            return true;
+        }
     }
 }
