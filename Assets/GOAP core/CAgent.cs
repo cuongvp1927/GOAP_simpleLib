@@ -24,6 +24,8 @@ public class CAgent : MonoBehaviour
 
     protected CPlanner planner;
 
+    bool interupt = false;
+
     protected virtual void Awake()
     {
         //ResetActionList();
@@ -71,7 +73,7 @@ public class CAgent : MonoBehaviour
     }
 
     // Function to create a new plan (action queue)
-    protected virtual void MakeNewPlan()
+    protected virtual void GetAGoal()
     {
         planner = new CPlanner();
         var sortedGoal = goalList.OrderBy(g => g.important);
@@ -97,17 +99,30 @@ public class CAgent : MonoBehaviour
         }
     }
 
+    protected virtual void AskForInterupt() { }
+
     protected virtual void LateUpdate()
     {
         // Check if currently running any action
         if ((currentAction != null) && (currentAction.isActive))
         {
+            // If sometime when running, player or user ask to stop the action. stop and re-plan
+            if ((interupt) && (currentAction.isInteruptable))
+            {
+                currentAction = null;
+                GetAGoal();
+            }
             // Check if the current action has complete yet?
             if (currentAction.isComplete)
             {
                 // Do pos calculation and switch to the next action
                 currentAction.Pos_Perform();
                 currentAction.isActive = false;
+                if (currentAction.forceReplan == true)
+                {
+                    GetAGoal();
+                    return ;
+                }
             }
         }
         else
@@ -115,8 +130,10 @@ public class CAgent : MonoBehaviour
             // If there is a goal to pursuit
             if (currentGoal != null)
             {
-                // Check if goal is satified
-                if (currentGoal.IsSatified())
+                // Check if done all action is finished. For we planed the action sequence to satisfied the goal, if the 
+                // action sequence is complete, most likely the goal will be satisfied. therefore this should count as 
+                // checking the completation of the goal.
+                if (actionQueue.Count <= 0)
                 {
                     // If goal is satisfied and non repeat, remove from the goal list
                     if (currentGoal.deletable)
@@ -124,25 +141,31 @@ public class CAgent : MonoBehaviour
                         goalList.Remove(currentGoal);
                     }
                     // And then find a new goal
-                    MakeNewPlan();
-                }
-
-                // Check if done all action is finished but not satisfied, this mean the goal must not been able to complete
-                // If this happen, temporary remove to the blacklist, so that after T time, be put back to the list.
-                if (actionQueue.Count <= 0)
-                {
-                    goalList.Remove(currentGoal);
-                    goalBlacklist.Add(currentGoal);
-                    MakeNewPlan();
+                    GetAGoal();
                 }
 
                 // Take 1 action from the plan queue, and execute it.
                 currentAction = actionQueue.Dequeue();
                 Debug.Log("Currently performing: " + currentAction.actionName);
+                // If the action is performable by checking Pre_performing calculation, default always return true
                 if (currentAction.Pre_Perform())
                 {
                     currentAction.isActive = true;
-                    currentAction.PerformAction();
+                    // If durring perfoming action, things happen that cause the action to fail, temporary remove 
+                    // the goal and re-plan.
+                    if (currentAction.PerformAction()) {
+                        goalList.Remove(currentGoal);
+                        goalBlacklist.Add(currentGoal);
+                        GetAGoal();
+                    }
+                }
+                // If checking Pre_performing false, meaning the action is unable to perform for some reason, temporary remove 
+                // the goal and re-plan.
+                else
+                {
+                    goalList.Remove(currentGoal);
+                    goalBlacklist.Add(currentGoal);
+                    GetAGoal();
                 }
             }
         }

@@ -13,7 +13,7 @@ namespace Goal
         public bool deletable = true;
         
         public List<CFact> goals;
-
+        public bool finished = false;
 
         public void Awake()
         {
@@ -30,11 +30,11 @@ namespace Goal
         //}
 
         // Function to check if goal is satisfied
-        public virtual bool IsSatified()
+        public virtual bool IsSatified(List<CFact> curState)
         {
             foreach (CFact goal in goals)
             {
-                CFact vp = CWorld.Instance.HasFact(goal.name);
+                CFact vp = curState.Find(g=>g.name == goal.name);
                 if ((vp==null) || (!vp.Equals(goal)))
                 {
                     return false;
