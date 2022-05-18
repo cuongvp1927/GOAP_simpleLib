@@ -22,6 +22,7 @@ namespace Unity.GOAP.Agent
         public List<CGoal> goalList;
         public List<CGoal> goalBlacklist;
 
+        public Vector3 position3D;
 
         protected List<CActionBase> possibleAction;
         protected Queue<CActionBase> actionQueue;
@@ -110,7 +111,6 @@ namespace Unity.GOAP.Agent
                     break;
                 }
             }
-            Debug.Log(currentGoal);
         }
 
         protected virtual void AskForInterupt() { }
@@ -149,6 +149,7 @@ namespace Unity.GOAP.Agent
                     // checking the completation of the goal.
                     if (actionQueue.Count <= 0)
                     {
+                        Debug.Log("Complete performing: " + currentAction.actionName);
                         // If goal is satisfied and non repeat, remove from the goal list
                         if (currentGoal.deletable)
                         {
@@ -160,15 +161,16 @@ namespace Unity.GOAP.Agent
 
                     // Take 1 action from the plan queue, and execute it.
                     currentAction = actionQueue.Dequeue();
-                    Debug.Log("Currently performing: " + currentAction.actionName);
                     // If the action is performable by checking Pre_performing calculation, default always return true
                     if (currentAction.Pre_Perform())
                     {
+                        Debug.Log("Currently performing: " + currentAction.actionName);
                         currentAction.isActive = true;
                         // If durring perfoming action, things happen that cause the action to fail, temporary remove 
                         // the goal and re-plan.
-                        if (currentAction.PerformAction())
+                        if (!currentAction.PerformAction())
                         {
+                            Debug.Log("Action fail to perform performing: " + currentAction.actionName);
                             goalList.Remove(currentGoal);
                             goalBlacklist.Add(currentGoal);
                             GetAGoal();
@@ -178,6 +180,7 @@ namespace Unity.GOAP.Agent
                     // the goal and re-plan.
                     else
                     {
+                        Debug.Log("Can not perform action: " + currentAction.actionName);
                         goalList.Remove(currentGoal);
                         goalBlacklist.Add(currentGoal);
                         GetAGoal();

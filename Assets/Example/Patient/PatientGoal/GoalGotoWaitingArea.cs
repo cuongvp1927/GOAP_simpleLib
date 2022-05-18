@@ -4,6 +4,7 @@ using UnityEngine;
 
 using Unity.GOAP.Goal;
 using Unity.GOAP.World;
+
 public class GoalGotoWaitingArea : CGoal
 {
     // Right now, the goal state is edited in the Inspector, but can be edit in here

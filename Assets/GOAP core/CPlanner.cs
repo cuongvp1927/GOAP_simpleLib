@@ -105,7 +105,7 @@ namespace Unity.GOAP.Planner
             Debug.Log("Action queue found");
             foreach (CActionBase a in re)
             {
-                Debug.Log(a.name);
+                Debug.Log(a.actionName);
             }
 
             return re;

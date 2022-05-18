@@ -31,15 +31,6 @@ namespace Unity.GOAP.Goal
                 return true;
             }
             return false;
-            //foreach (CFact goal in goals)
-            //{
-            //    CFact vp = curState.Find(g=>g.name == goal.name);
-            //    if ((vp==null) || (!vp.Equals(goal)))
-            //    {
-            //        return false;
-            //    }
-            //}
-            //return true;
         }
 
     }

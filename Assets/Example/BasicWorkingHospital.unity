@@ -3743,8 +3743,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   important: 1
-  goalName: SomeGoal
+  goalName: Go to Waiting Area
   deletable: 1
+  goalList:
+  - name: AtWaitingArea
+    value: 1
   finished: 0
 --- !u!114 &1714802036
 MonoBehaviour:
@@ -3759,10 +3762,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cost: 1
-  actionName: New Action
-  duration: 0.5
+  actionName: Action Go To Waiting Area
   PreConditions: []
-  Effects: []
+  Effects:
+  - name: AtWaitingArea
+    value: 1
   isActive: 0
   isInteruptable: 0
   forceReplan: 0
