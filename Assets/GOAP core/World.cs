@@ -1,57 +1,62 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
-namespace World
+namespace Unity.GOAP.World
 {
+    [System.Serializable]
     public class CFact
     {
-        public string name { get; set; }
-        public int value { get; set; }
+        public string name;
+        public int value;
 
         public CFact(string name, int value)
         {
             this.name = name;
             this.value = value;
         }
-        //public bool isEqual(CFact anotherFact)
-        //{
-        //    return this.value == anotherFact.value;
-        //}
+
+        // In case of changing this to another type of value, this may need to change
+        public bool isEqual(CFact anotherFact)
+        {
+            return Equals(this.value, anotherFact.value);
+        }
     }
 
-    public sealed class CWorld
+    public class CFactManager
     {
-        private static readonly CWorld instance = new CWorld();
         private static List<CFact> facts;
 
-        static CWorld()
+        public CFactManager()
         {
             facts = new List<CFact>();
         }
-
-        private CWorld() {}
-
-        public static CWorld Instance
+        public CFactManager(List<CFact> factlist)
         {
-            get { return instance; }
+            facts = new List<CFact>(factlist);
         }
 
-        public List<CFact> GetFacts()
+        public List<CFact> GetFactList()
         {
             return facts;
         }
 
-        public CFact HasFact(string name)
+        public bool HasFact(CFact fact)
+        {
+            return facts.Any(fa => fa.name == fact.name);
+        }
+
+        public CFact GetFact(string name)
         {
             return facts.Find(fa => fa.name == name);
         }
 
         public void ChangeFact(string name, int value)
         {
-            CFact fact = facts.Find(fa => fa.name == name);
+            CFact fact = GetFact(name);
             if (fact != null)
-            { 
+            {
                 fact.value = value;
             }
             else
@@ -73,6 +78,46 @@ namespace World
                 facts.Remove(fact);
             }
         }
+
+        public bool CompareFactList(CFactManager anotherSet)
+        {
+            foreach (CFact f in facts)
+            {
+                if (!anotherSet.HasFact(f))
+                {
+                    return false;
+                }
+                CFact f2 = anotherSet.GetFact(f.name);
+                if (!f.isEqual(f2))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    public sealed class CWorld
+    {
+        private static readonly CWorld instance = new CWorld();
+        private static CFactManager factManager;
+
+        static CWorld()
+        {
+            factManager = new CFactManager();
+        }
+
+        private CWorld() { }
+
+        public static CWorld Instance
+        {
+            get { return instance; }
+        }
+
+        public CFactManager GetFacts()
+        {
+            return factManager;
+        } 
 
     }
 

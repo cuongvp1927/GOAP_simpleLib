@@ -2,45 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using World;
+using Unity.GOAP.World;
 
-namespace Goal
+namespace Unity.GOAP.Goal
 {
+    [System.Serializable]
     public class CGoal : MonoBehaviour
     {
         public int important = 1;
         public string goalName = "SomeGoal";
         public bool deletable = true;
-        
-        public List<CFact> goals;
+
+        public List<CFact> goalList;
+
+        public CFactManager goals;
         public bool finished = false;
 
-        public void Awake()
+        protected virtual void Start()
         {
-            goals = new List<CFact>();
+            goals = new CFactManager(goalList);
         }
 
-        //public CGoal() {}
-
-        //public CGoal(string n, int i, bool d)
-        //{
-        //    this.name = n;
-        //    this.important = i;
-        //    this.deletable = d;
-        //}
-
         // Function to check if goal is satisfied
-        public virtual bool IsSatified(List<CFact> curState)
+        public virtual bool IsSatified(CFactManager curState)
         {
-            foreach (CFact goal in goals)
+            if (curState.CompareFactList(goals))
             {
-                CFact vp = curState.Find(g=>g.name == goal.name);
-                if ((vp==null) || (!vp.Equals(goal)))
-                {
-                    return false;
-                }
+                return true;
             }
-            return true;
+            return false;
+            //foreach (CFact goal in goals)
+            //{
+            //    CFact vp = curState.Find(g=>g.name == goal.name);
+            //    if ((vp==null) || (!vp.Equals(goal)))
+            //    {
+            //        return false;
+            //    }
+            //}
+            //return true;
         }
 
     }
