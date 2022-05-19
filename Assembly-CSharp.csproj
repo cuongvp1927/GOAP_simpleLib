@@ -61,10 +61,11 @@
     <Compile Include="Assets\Example\Patient\Patient.cs" />
     <Compile Include="Assets\GOAP core\CGoal.cs" />
     <Compile Include="Assets\GOAP core\World.cs" />
+    <Compile Include="Assets\Example\Patient\PatientGoal\GoalGotoWaitingArea.cs" />
     <Compile Include="Assets\GOAP core\CPlanner.cs" />
     <Compile Include="Assets\GOAP core\WorldStates.cs" />
-    <Compile Include="Assets\Example\Patient\PatientGoal\GoalGotoWaitingArea.cs" />
     <Compile Include="Assets\Example\Patient\PatientAction\ActionGoToWaitingArea.cs" />
+    <Compile Include="Assets\Example\Patient\PatientAction\ActionGoToRegister.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -42,7 +42,7 @@ namespace Unity.GOAP.Agent
 
         protected virtual void Start()
         {
-            Debug.Log("Started");
+            //Debug.Log("Started");
             //ResetActionList();
             //ResetGoalList();
         }
@@ -127,8 +127,9 @@ namespace Unity.GOAP.Agent
                     GetAGoal();
                 }
                 // Check if the current action has complete yet?
-                if (currentAction.isComplete)
+                if (currentAction.IsComplete())
                 {
+                    Debug.Log("Complete performing: " + currentAction.actionName);
                     // Do pos calculation and switch to the next action
                     currentAction.Pos_Perform();
                     currentAction.isActive = false;
@@ -149,7 +150,7 @@ namespace Unity.GOAP.Agent
                     // checking the completation of the goal.
                     if (actionQueue.Count <= 0)
                     {
-                        Debug.Log("Complete performing: " + currentAction.actionName);
+                        Debug.Log("Complete Goal: " + currentGoal.goalName);
                         // If goal is satisfied and non repeat, remove from the goal list
                         if (currentGoal.deletable)
                         {
@@ -158,32 +159,34 @@ namespace Unity.GOAP.Agent
                         // And then find a new goal
                         GetAGoal();
                     }
-
-                    // Take 1 action from the plan queue, and execute it.
-                    currentAction = actionQueue.Dequeue();
-                    // If the action is performable by checking Pre_performing calculation, default always return true
-                    if (currentAction.Pre_Perform())
+                    else
                     {
-                        Debug.Log("Currently performing: " + currentAction.actionName);
-                        currentAction.isActive = true;
-                        // If durring perfoming action, things happen that cause the action to fail, temporary remove 
-                        // the goal and re-plan.
-                        if (!currentAction.PerformAction())
+                        // Take 1 action from the plan queue, and execute it.
+                        currentAction = actionQueue.Dequeue();
+                        // If the action is performable by checking Pre_performing calculation, default always return true
+                        if (currentAction.Pre_Perform())
                         {
-                            Debug.Log("Action fail to perform performing: " + currentAction.actionName);
+                            Debug.Log("Currently performing: " + currentAction.actionName);
+                            currentAction.isActive = true;
+                            // If durring perfoming action, things happen that cause the action to fail, temporary remove 
+                            // the goal and re-plan.
+                            if (!currentAction.PerformAction())
+                            {
+                                Debug.Log("Action fail to perform performing: " + currentAction.actionName);
+                                goalList.Remove(currentGoal);
+                                goalBlacklist.Add(currentGoal);
+                                GetAGoal();
+                            }
+                        }
+                        // If checking Pre_performing false, meaning the action is unable to perform for some reason, temporary remove 
+                        // the goal and re-plan.
+                        else
+                        {
+                            Debug.Log("Can not perform action: " + currentAction.actionName);
                             goalList.Remove(currentGoal);
                             goalBlacklist.Add(currentGoal);
                             GetAGoal();
                         }
-                    }
-                    // If checking Pre_performing false, meaning the action is unable to perform for some reason, temporary remove 
-                    // the goal and re-plan.
-                    else
-                    {
-                        Debug.Log("Can not perform action: " + currentAction.actionName);
-                        goalList.Remove(currentGoal);
-                        goalBlacklist.Add(currentGoal);
-                        GetAGoal();
                     }
                 }
                 else

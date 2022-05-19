@@ -18,30 +18,36 @@ namespace Unity.GOAP.Action {
         public List<CFact> PreConditions;
         public List<CFact> Effects;
 
-        CAgent agent;
+        protected CAgent agent;
 
         public bool isActive = false;
         public bool isInteruptable = false;
         public bool forceReplan = false;
-
-        public bool isComplete;
 
         public CFactManager preconditions;
         public CFactManager effects;
 
         public virtual void Awake()
         {
-            PreConditions = new List<CFact>();
-            Effects = new List<CFact>();
-
-            isComplete = false;
+            preconditions = new CFactManager();
+            effects = new CFactManager();
         }
 
         public virtual void Start()
         {
-            preconditions = new CFactManager(PreConditions);
-            effects = new CFactManager(Effects);
+            foreach (CFact f in PreConditions)
+            { 
+                Debug.Log(f.name);
+                preconditions.AddFact(f.name, f.value);
+            }
+            foreach (CFact f2 in Effects)
+            {
+                effects.AddFact(f2.name, f2.value);
+            }
         }
+
+        // Check complete, required
+        public abstract bool IsComplete();
 
         // Main action, required
         public abstract bool PerformAction();

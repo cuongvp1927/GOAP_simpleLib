@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-using Unity.GOAP.Agent;
 using Unity.GOAP.Action;
+using Unity.GOAP.Agent;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class ActionGoToWaitingArea : CActionBase
+public class ActionGoToRegister : CActionBase
 {
-    // Start is called before the first frame update
     NavMeshAgent navAgent;
+
 
     public override void Awake()
     {
@@ -22,8 +22,7 @@ public class ActionGoToWaitingArea : CActionBase
 
     public override bool Pre_Perform()
     {
-        GameObject target;
-        target = GameObject.FindWithTag("WaitingArea");
+        GameObject target = GameObject.FindWithTag("Reception");
         if (target == null)
         {
             return false;
@@ -36,9 +35,10 @@ public class ActionGoToWaitingArea : CActionBase
     public override bool PerformAction()
     {
         navAgent.SetDestination(agent.position3D);
+
+
         return true;
     }
-
     public override bool IsComplete()
     {
         if (navAgent.remainingDistance < 2f)

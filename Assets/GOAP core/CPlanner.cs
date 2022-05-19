@@ -36,6 +36,7 @@ namespace Unity.GOAP.Planner
             foreach (CActionBase act in actionList)
             {
                 bool doable = true;
+
                 foreach (CFact fact in act.preconditions.GetFactList())
                 {
                     if (!curState.HasFact(fact))
@@ -46,6 +47,18 @@ namespace Unity.GOAP.Planner
                 }
                 if (doable) 
                     doableAction.Add(act);
+            }
+
+            Debug.Log("Current state: ");
+            foreach (CFact f in curState.GetFactList())
+            {
+                Debug.Log(f.name);
+            }
+
+            Debug.Log("Doable Action: ");
+            foreach (CActionBase a in doableAction)
+            {
+                Debug.Log(a.actionName);
             }
 
             return doableAction;

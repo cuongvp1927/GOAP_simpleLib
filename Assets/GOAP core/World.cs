@@ -26,7 +26,7 @@ namespace Unity.GOAP.World
 
     public class CFactManager
     {
-        private static List<CFact> facts;
+        private List<CFact> facts;
 
         public CFactManager()
         {
@@ -79,6 +79,7 @@ namespace Unity.GOAP.World
             }
         }
 
+        // Check if every facts in this list is existed in anotherSet's list
         public bool CompareFactList(CFactManager anotherSet)
         {
             foreach (CFact f in facts)

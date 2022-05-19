@@ -26,9 +26,10 @@ namespace Unity.GOAP.Goal
         // Function to check if goal is satisfied
         public virtual bool IsSatified(CFactManager curState)
         {
-            if (curState.CompareFactList(goals))
-            {
-                return true;
+            //if (curState.CompareFactList(goals))
+            if (goals.CompareFactList(curState))
+                {
+                    return true;
             }
             return false;
         }
