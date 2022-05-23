@@ -5,6 +5,8 @@ using UnityEngine;
 using Unity.GOAP.Agent;
 public class Patient : CAgent
 {
+    public List<GameObject> inventory;
+
     protected override void Awake()
     {
         base.Awake();

@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 using Unity.GOAP.Agent;
 using Unity.GOAP.Action;
+using Unity.GOAP.World;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class ActionGoToWaitingArea : CActionBase
@@ -30,19 +31,43 @@ public class ActionGoToWaitingArea : CActionBase
         }
         agent.position3D = target.transform.position;
 
-        return base.Pre_Perform();
+        return true;
     }
 
     public override bool PerformAction()
     {
         navAgent.SetDestination(agent.position3D);
+        isActive = true;
+
         return true;
     }
 
-    public override bool IsComplete()
+    public override bool Pos_Perform()
+    {
+        ResourceManager.Instance.AddPatient(agent);
+
+        isActive = false;
+        return true;
+    }
+
+    public override bool HasCompleted()
     {
         if (navAgent.remainingDistance < 2f)
             return true;
+        return false;
+    }
+
+    public override bool HasFailed()
+    {
+        if (HasCompleted())
+        {
+            return false;
+        }
+
+        if (navAgent.enabled && !navAgent.hasPath && !navAgent.pathPending && navAgent.remainingDistance == 0)
+        {
+            return true;
+        }
         return false;
     }
 

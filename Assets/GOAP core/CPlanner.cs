@@ -49,18 +49,6 @@ namespace Unity.GOAP.Planner
                     doableAction.Add(act);
             }
 
-            Debug.Log("Current state: ");
-            foreach (CFact f in curState.GetFactList())
-            {
-                Debug.Log(f.name);
-            }
-
-            Debug.Log("Doable Action: ");
-            foreach (CActionBase a in doableAction)
-            {
-                Debug.Log(a.actionName);
-            }
-
             return doableAction;
         }
 
@@ -68,7 +56,7 @@ namespace Unity.GOAP.Planner
 
         // This implementation is long and costly
         // If have time, improve it with State table and better search algorithm for better performance
-        public Queue<CActionBase> Plan(CGoal goal, List<CActionBase> actionList, CFactManager agentFact)
+        public LinkedList<CActionBase> Plan(CGoal goal, List<CActionBase> actionList, CFactManager agentFact)
         {
             List<Node> leaves = new List<Node>();
             // The first node have no parent, no action, no cost, and take the current world state and agent states as current state
@@ -76,10 +64,7 @@ namespace Unity.GOAP.Planner
 
             foreach (CFact f in agentFact.GetFactList())
             {
-                if (!listFact.HasFact(f))
-                {
-                    listFact.AddFact(f.name, f.value);
-                }
+                listFact.AddFact(f);
             }
 
             Node startNode = new Node(null, 0, null, listFact.GetFactList());
@@ -89,7 +74,7 @@ namespace Unity.GOAP.Planner
             // If do not found a plan
             if (!hasPlan)
             {
-                Debug.Log("No plan found");
+                //Debug.Log("No plan found");
                 return null;
             }
 
@@ -104,22 +89,22 @@ namespace Unity.GOAP.Planner
             }
 
             // From the cheapest leaf, trace back to the root, with each action added to the action queue
-            Queue<CActionBase> actionQueue = new Queue<CActionBase>();
+            LinkedList<CActionBase> actionQueue = new LinkedList<CActionBase>();
             while (cheapestLeaf != null)
             {
                 if (cheapestLeaf.action != null)
-                    actionQueue.Enqueue(cheapestLeaf.action);
+                    actionQueue.AddFirst(cheapestLeaf.action);
 
                 cheapestLeaf = cheapestLeaf.parent;
             }
 
-            Queue<CActionBase> re = new Queue<CActionBase>(actionQueue.Reverse());
+            LinkedList<CActionBase> re = new LinkedList<CActionBase>(actionQueue.Reverse());
 
-            Debug.Log("Action queue found");
-            foreach (CActionBase a in re)
-            {
-                Debug.Log(a.actionName);
-            }
+            //Debug.Log("Action queue found");
+            //foreach (CActionBase a in re)
+            //{
+            //    Debug.Log(a.actionName);
+            //}
 
             return re;
         }

@@ -15,7 +15,8 @@ namespace Unity.GOAP.Agent
     {
         public string agentName = "agent Name";
 
-        //public List<CFact> agentFact;
+        // Agent own belief system, or state that only the owner has access to.
+        // This opposited to the world states, where all agent get access.
         public CFactManager agentFact;
 
         public List<CActionBase> actionList;
@@ -25,7 +26,7 @@ namespace Unity.GOAP.Agent
         public Vector3 position3D;
 
         protected List<CActionBase> possibleAction;
-        protected Queue<CActionBase> actionQueue;
+        protected LinkedList<CActionBase> actionQueue;
         protected CActionBase currentAction;
         protected CGoal currentGoal;
 
@@ -47,14 +48,14 @@ namespace Unity.GOAP.Agent
             //ResetGoalList();
         }
 
-        protected virtual void AddAction(CActionBase action)
+        protected void AddAction(CActionBase action)
         {
             if (!this.actionList.Contains(action))
             {
                 this.actionList.Add(action);
             }
         }
-        protected virtual void AddGoal(CGoal goal)
+        protected void AddGoal(CGoal goal)
         {
             if (!this.goalList.Contains(goal))
             {
@@ -62,7 +63,7 @@ namespace Unity.GOAP.Agent
             }
         }
 
-        protected virtual void ResetActionList()
+        protected void ResetActionList()
         {
             actionList = new List<CActionBase>();
             CActionBase[] acts = this.GetComponents<CActionBase>();
@@ -72,7 +73,7 @@ namespace Unity.GOAP.Agent
             }
         }
 
-        protected virtual void ResetGoalList()
+        protected void ResetGoalList()
         {
             goalList = new List<CGoal>();
             CGoal[] gos = this.GetComponents<CGoal>();
@@ -84,9 +85,9 @@ namespace Unity.GOAP.Agent
         }
 
         // Called after t time to reset blacklist back to goal list
-        protected virtual void ResetBlackList()
+        protected void ResetBlackList()
         {
-            foreach (CGoal g in goalBlacklist)
+            foreach (CGoal g in goalBlacklist.ToList())
             {
                 if (!goalList.Contains(g))
                 {
@@ -96,6 +97,15 @@ namespace Unity.GOAP.Agent
             }
         }
 
+        protected void BlackListingGoal(CGoal goal)
+        {
+            if (!goalBlacklist.Contains(goal) && goal != null)
+            {
+                goalBlacklist.Add(goal);
+            }
+        }
+
+
         // Function to create a new plan (action queue)
         protected virtual void GetAGoal()
         {
@@ -104,7 +114,10 @@ namespace Unity.GOAP.Agent
             var sortedGoal = goalList.OrderBy(g => g.important);
             foreach (CGoal g in sortedGoal)
             {
+
                 actionQueue = planner.Plan(g, actionList, agentFact);
+                ResetActionList();
+
                 if (actionQueue != null)
                 {
                     currentGoal = g;
@@ -113,10 +126,42 @@ namespace Unity.GOAP.Agent
             }
         }
 
-        protected virtual void AskForInterupt() { }
+        protected virtual void AskForInterupt() {
+            throw new System.NotImplementedException();
+        }
 
+        protected virtual void PerformAction(CActionBase action) 
+        {
+            // If the action is performable by checking Pre_performing calculation, default always return true
+            if (currentAction.Pre_Perform())
+            {
+                Debug.Log("Currently performing: " + currentAction.actionName);
+
+                currentAction.PerformAction();
+            }
+            // If checking Pre_performing false, meaning the action is unable to perform for some reason, temporary remove 
+            // the goal and re-plan.
+            else
+            {
+                Debug.Log("Can not perform action: " + currentAction.actionName);
+                goalList.Remove(currentGoal);
+                BlackListingGoal(currentGoal);
+                GetAGoal();
+            }
+            return;
+        }
+
+        float timer = 0f;
         protected virtual void LateUpdate()
         {
+            // After every x sec, reset the blacklist, this can be changed to different counter methods
+            timer = timer += Time.deltaTime;
+            if (timer >= 2f)
+            {
+                ResetBlackList();
+                timer = 0;
+            }
+
             // Check if currently running any action
             if ((currentAction != null) && (currentAction.isActive))
             {
@@ -125,19 +170,46 @@ namespace Unity.GOAP.Agent
                 {
                     currentAction = null;
                     GetAGoal();
+                    return;
                 }
-                // Check if the current action has complete yet?
-                if (currentAction.IsComplete())
+
+                // If durring perfoming action, things happen that cause the action to fail, temporary remove 
+                // the goal and re-plan.
+                if (currentAction.HasFailed())
                 {
-                    Debug.Log("Complete performing: " + currentAction.actionName);
+                    Debug.Log("Action fail to perform performing: " + currentAction.actionName);
+                    goalList.Remove(currentGoal);
+                    BlackListingGoal(currentGoal);
+                    GetAGoal();
+                    return;
+                }
+
+                // Check if the current action has complete yet?
+                if (currentAction.HasCompleted())
+                {
                     // Do pos calculation and switch to the next action
                     currentAction.Pos_Perform();
-                    currentAction.isActive = false;
                     if (currentAction.forceReplan == true)
                     {
                         GetAGoal();
                         return;
                     }
+
+                    // Should performing the action automatically add effect to the world state?
+                    // If should, what will it be? World state or belief?
+                    // As being undecided right now, the effect will be splited into 3
+
+                    // Adding 
+                    foreach (CFact f2 in currentAction.worldEffects)
+                    {
+                        CWorld.Instance.GetFacts().AddFact(f2);
+                    }
+
+                    foreach (CFact f2 in currentAction.agentEffects)
+                    {
+                        agentFact.AddFact(f2);
+                    }
+                    return;
                 }
             }
             else
@@ -158,40 +230,22 @@ namespace Unity.GOAP.Agent
                         }
                         // And then find a new goal
                         GetAGoal();
+                        return;
                     }
                     else
                     {
                         // Take 1 action from the plan queue, and execute it.
-                        currentAction = actionQueue.Dequeue();
-                        // If the action is performable by checking Pre_performing calculation, default always return true
-                        if (currentAction.Pre_Perform())
-                        {
-                            Debug.Log("Currently performing: " + currentAction.actionName);
-                            currentAction.isActive = true;
-                            // If durring perfoming action, things happen that cause the action to fail, temporary remove 
-                            // the goal and re-plan.
-                            if (!currentAction.PerformAction())
-                            {
-                                Debug.Log("Action fail to perform performing: " + currentAction.actionName);
-                                goalList.Remove(currentGoal);
-                                goalBlacklist.Add(currentGoal);
-                                GetAGoal();
-                            }
-                        }
-                        // If checking Pre_performing false, meaning the action is unable to perform for some reason, temporary remove 
-                        // the goal and re-plan.
-                        else
-                        {
-                            Debug.Log("Can not perform action: " + currentAction.actionName);
-                            goalList.Remove(currentGoal);
-                            goalBlacklist.Add(currentGoal);
-                            GetAGoal();
-                        }
+                        currentAction = actionQueue.Last();
+                        PerformAction(currentAction);
+                        // Action is completed then remove the action from the action queue
+                        actionQueue.RemoveLast();
+                        return;
                     }
                 }
                 else
                 {
                     GetAGoal();
+                    return;
                 }
             }
         }

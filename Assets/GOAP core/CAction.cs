@@ -16,7 +16,15 @@ namespace Unity.GOAP.Action {
         //public float posActionDuration = 0.5f;
 
         public List<CFact> PreConditions;
+
+        // The special effect used for planning only, does not affect the world state and the agent's state
         public List<CFact> Effects;
+
+        // The effect to the agent's state, does not affect the world state
+        public List<CFact> agentEffects;
+
+        // The effect to the world state, does not affect the agent's state
+        public List<CFact> worldEffects;
 
         protected CAgent agent;
 
@@ -37,28 +45,42 @@ namespace Unity.GOAP.Action {
         {
             foreach (CFact f in PreConditions)
             { 
-                Debug.Log(f.name);
                 preconditions.AddFact(f.name, f.value);
             }
+
             foreach (CFact f2 in Effects)
+            {
+                effects.AddFact(f2.name, f2.value);
+            }
+            foreach (CFact f2 in agentEffects)
+            {
+                effects.AddFact(f2.name, f2.value);
+            }
+            foreach (CFact f2 in worldEffects)
             {
                 effects.AddFact(f2.name, f2.value);
             }
         }
 
         // Check complete, required
-        public abstract bool IsComplete();
+        public abstract bool HasCompleted();
+        // Check if failed, required
+        public abstract bool HasFailed();
 
         // Main action, required
         public abstract bool PerformAction();
         // Pre calculation if needed, return true to start performing the action.
         public virtual bool Pre_Perform()
         {
+            isActive = true;
             return true;
         }
         // Pos calculation if needed.
         public virtual bool Pos_Perform()
         {
+
+            Debug.Log("Complete performing: " + actionName);
+            isActive = false;
             return true;
         }
     }

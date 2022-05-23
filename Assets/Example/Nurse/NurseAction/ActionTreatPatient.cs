@@ -7,11 +7,9 @@ using Unity.GOAP.Action;
 using Unity.GOAP.Agent;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class ActionGoToRegister : CActionBase
+public class ActionTreatPatient : CActionBase
 {
     NavMeshAgent navAgent;
-
-
     public override void Awake()
     {
         base.Awake();
@@ -22,29 +20,48 @@ public class ActionGoToRegister : CActionBase
 
     public override bool Pre_Perform()
     {
-        GameObject target = GameObject.FindWithTag("Reception");
+        GameObject target = null;
+        Nurse nurse = (Nurse)agent;
+        foreach (GameObject go in nurse.inventory)
+        {
+            if (go.tag == "Cubicle")
+            {
+                target = go;
+                break;
+            }
+        }
+
         if (target == null)
         {
             return false;
         }
+
         agent.position3D = target.transform.position;
         return true;
     }
 
+    float timer = 0f;
+    public override bool Pos_Perform()
+    {
+        timer = timer += Time.deltaTime;
+        if (timer >= 2f)
+        {
+            Debug.Log("Complete performing: " + actionName);
+            this.isActive = false;
+            timer = 0;
+        }
+        return true;
+    }
     public override bool PerformAction()
     {
         navAgent.SetDestination(agent.position3D);
         isActive = true;
-
         return true;
     }
-
     public override bool HasCompleted()
     {
         if (navAgent.remainingDistance < 2f)
-        {
             return true;
-        }
         return false;
     }
 
@@ -60,19 +77,5 @@ public class ActionGoToRegister : CActionBase
             return true;
         }
         return false;
-    }
-
-    float timer = 0f;
-    public override bool Pos_Perform()
-    {
-        timer = timer += Time.deltaTime;
-        if (timer >= 2f)
-        {
-            Debug.Log("Complete performing: " + actionName);
-            this.isActive = false;
-            timer = 0;
-        }
-
-        return true;
     }
 }

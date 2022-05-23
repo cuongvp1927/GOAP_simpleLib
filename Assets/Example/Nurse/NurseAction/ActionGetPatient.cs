@@ -7,10 +7,11 @@ using Unity.GOAP.Action;
 using Unity.GOAP.Agent;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class ActionGoToRegister : CActionBase
+public class ActionGetPatient : CActionBase
 {
     NavMeshAgent navAgent;
-
+    Patient patient;
+    GameObject cube;
 
     public override void Awake()
     {
@@ -19,35 +20,41 @@ public class ActionGoToRegister : CActionBase
         this.navAgent = this.gameObject.GetComponent<NavMeshAgent>();
         this.agent = this.gameObject.GetComponent<CAgent>();
     }
-
     public override bool Pre_Perform()
     {
-        GameObject target = GameObject.FindWithTag("Reception");
-        if (target == null)
+        cube = ResourceManager.Instance.RemoveCube();
+        if (cube == null)
         {
             return false;
         }
-        agent.position3D = target.transform.position;
+
+        patient = (Patient) ResourceManager.Instance.RemovePatient();
+        if (patient == null)
+        {
+            ResourceManager.Instance.AddCube(cube);
+            return false;
+        }
+
+        agent.position3D = patient.transform.position;
         return true;
     }
 
-    public override bool PerformAction()
+    public override bool Pos_Perform()
     {
-        navAgent.SetDestination(agent.position3D);
-        isActive = true;
+        patient.inventory.Add(cube);
 
-        return true;
+        Nurse nurse = (Nurse)agent;
+        nurse.inventory.Add(cube);
+
+        return base.Pos_Perform();
     }
 
     public override bool HasCompleted()
     {
         if (navAgent.remainingDistance < 2f)
-        {
             return true;
-        }
         return false;
     }
-
     public override bool HasFailed()
     {
         if (HasCompleted())
@@ -62,17 +69,12 @@ public class ActionGoToRegister : CActionBase
         return false;
     }
 
-    float timer = 0f;
-    public override bool Pos_Perform()
+    public override bool PerformAction()
     {
-        timer = timer += Time.deltaTime;
-        if (timer >= 2f)
-        {
-            Debug.Log("Complete performing: " + actionName);
-            this.isActive = false;
-            timer = 0;
-        }
+        navAgent.SetDestination(agent.position3D);
+        isActive = true;
 
         return true;
     }
+
 }

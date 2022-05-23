@@ -61,13 +61,23 @@ namespace Unity.GOAP.World
             }
             else
             {
-                AddFact(name, value);
+                facts.Add(fact);
             }
         }
         public void AddFact(string name, int value)
         {
-            CFact fact = new CFact(name, value);
-            facts.Add(fact);
+            if (GetFact(name) == null)
+            {
+                CFact fact = new CFact(name, value);
+                facts.Add(fact);
+            }
+        }
+        public void AddFact(CFact fact)
+        {
+            if (GetFact(fact.name)==null && fact!=null)
+            {
+                facts.Add(fact);
+            }
         }
 
         public void RemoveFact(string name)
