@@ -56,7 +56,7 @@ namespace Unity.GOAP.Planner
 
         // This implementation is long and costly
         // If have time, improve it with State table and better search algorithm for better performance
-        public LinkedList<CActionBase> Plan(CGoal goal, List<CActionBase> actionList, CFactManager agentFact)
+        public Queue<CActionBase> Plan(CGoal goal, List<CActionBase> actionList, CFactManager agentFact)
         {
             List<Node> leaves = new List<Node>();
             // The first node have no parent, no action, no cost, and take the current world state and agent states as current state
@@ -89,16 +89,16 @@ namespace Unity.GOAP.Planner
             }
 
             // From the cheapest leaf, trace back to the root, with each action added to the action queue
-            LinkedList<CActionBase> actionQueue = new LinkedList<CActionBase>();
+            Queue<CActionBase> actionQueue = new Queue<CActionBase>();
             while (cheapestLeaf != null)
             {
                 if (cheapestLeaf.action != null)
-                    actionQueue.AddFirst(cheapestLeaf.action);
+                    actionQueue.Enqueue(cheapestLeaf.action);
 
                 cheapestLeaf = cheapestLeaf.parent;
             }
 
-            LinkedList<CActionBase> re = new LinkedList<CActionBase>(actionQueue.Reverse());
+            Queue<CActionBase> re = new Queue<CActionBase>(actionQueue.Reverse());
 
             //Debug.Log("Action queue found");
             //foreach (CActionBase a in re)

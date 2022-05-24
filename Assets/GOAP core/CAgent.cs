@@ -26,7 +26,7 @@ namespace Unity.GOAP.Agent
         public Vector3 position3D;
 
         protected List<CActionBase> possibleAction;
-        protected LinkedList<CActionBase> actionQueue;
+        protected Queue<CActionBase> actionQueue;
         protected CActionBase currentAction;
         protected CGoal currentGoal;
 
@@ -111,19 +111,21 @@ namespace Unity.GOAP.Agent
         {
             planner = new CPlanner();
             currentGoal = null;
-            var sortedGoal = goalList.OrderBy(g => g.important);
+            var sortedGoal = goalList.OrderByDescending(g => g.important);
+
             foreach (CGoal g in sortedGoal)
             {
-
-                actionQueue = planner.Plan(g, actionList, agentFact);
-                ResetActionList();
+                List<CActionBase> alist = new List<CActionBase>(actionList);
+                actionQueue = planner.Plan(g, alist, agentFact);
 
                 if (actionQueue != null)
                 {
                     currentGoal = g;
+                    Debug.Log("Start for goal: " + currentGoal.goalName);
                     break;
                 }
             }
+
         }
 
         protected virtual void AskForInterupt() {
@@ -235,10 +237,9 @@ namespace Unity.GOAP.Agent
                     else
                     {
                         // Take 1 action from the plan queue, and execute it.
-                        currentAction = actionQueue.Last();
+                        currentAction = actionQueue.Dequeue();
                         PerformAction(currentAction);
                         // Action is completed then remove the action from the action queue
-                        actionQueue.RemoveLast();
                         return;
                     }
                 }

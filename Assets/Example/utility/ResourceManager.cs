@@ -45,7 +45,6 @@ public sealed class ResourceManager
 
     public void AddPatient(CAgent p)
     {
-        Debug.Log("add patient");
         patientQueue.Enqueue(p);
     }
 

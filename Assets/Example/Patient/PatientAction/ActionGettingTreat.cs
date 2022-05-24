@@ -43,8 +43,8 @@ public class ActionGettingTreat : CActionBase
     float timer = 0f;
     public override bool Pos_Perform()
     {
-        timer = timer += Time.deltaTime;
-        if (timer >= 2f)
+        timer = timer + Time.deltaTime;
+        if (timer >= 5f)
         {
             Debug.Log("Complete performing: " + actionName);
             this.isActive = false;

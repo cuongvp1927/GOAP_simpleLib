@@ -7,7 +7,7 @@ using Unity.GOAP.Action;
 using Unity.GOAP.Agent;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class ActionTreatPatient : CActionBase
+public class ActionGoHome : CActionBase
 {
     NavMeshAgent navAgent;
     public override void Awake()
@@ -17,20 +17,9 @@ public class ActionTreatPatient : CActionBase
         this.navAgent = this.gameObject.GetComponent<NavMeshAgent>();
         this.agent = this.gameObject.GetComponent<CAgent>();
     }
-
     public override bool Pre_Perform()
     {
-        GameObject target = null;
-        Nurse nurse = (Nurse)agent;
-        foreach (GameObject go in nurse.inventory)
-        {
-            if (go.tag == "Cubicle")
-            {
-                target = go;
-                break;
-            }
-        }
-
+        GameObject target = GameObject.FindGameObjectWithTag("Home");
         if (target == null)
         {
             return false;
@@ -40,24 +29,20 @@ public class ActionTreatPatient : CActionBase
         return true;
     }
 
-    float timer = 0f;
     public override bool Pos_Perform()
     {
-        timer = timer + Time.deltaTime;
-        if (timer >= 2f)
-        {
-            Debug.Log("Complete performing: " + actionName);
-            this.isActive = false;
-            timer = 0;
-        }
+        //Destroy(this.gameObject);
+        isActive = false;
         return true;
     }
+
     public override bool PerformAction()
     {
         navAgent.SetDestination(agent.position3D);
         isActive = true;
         return true;
     }
+
     public override bool HasCompleted()
     {
         if (navAgent.remainingDistance < 2f)

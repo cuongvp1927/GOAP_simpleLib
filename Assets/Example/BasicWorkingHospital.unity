@@ -3917,11 +3917,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d248e2812656ab4f8104c35a20f81a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  important: 1
+  important: 10
   goalName: GetTreat
   deletable: 1
   goalList:
-  - name: AtWaitingArea
+  - name: GotTreat
     value: 1
   finished: 0
 --- !u!114 &1714802036
@@ -3996,6 +3996,33 @@ MonoBehaviour:
   isActive: 0
   isInteruptable: 0
   forceReplan: 0
+--- !u!114 &1714802039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714802033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c722329f23c15ba43b4cb0d7a1275fd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 1
+  actionName: GoHome
+  PreConditions:
+  - name: Treated
+    value: 1
+  Effects:
+  - name: At Home
+    value: 1
+  agentEffects:
+  - name: At Home
+    value: 1
+  worldEffects: []
+  isActive: 0
+  isInteruptable: 0
+  forceReplan: 0
 --- !u!114 &1714802040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4009,18 +4036,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cost: 1
-  actionName: New Action
+  actionName: Getting Treat
   PreConditions:
-  - name: AtWaitingArea
+  - name: AtHospital
     value: 1
   Effects:
   - name: GotTreat
-    value: 0
-  agentEffects: []
+    value: 1
+  agentEffects:
+  - name: Treated
+    value: 1
   worldEffects: []
   isActive: 0
   isInteruptable: 0
   forceReplan: 0
+--- !u!114 &1714802041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714802033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e8023021a83ee0409ecb1953afb9cab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  important: 1
+  goalName: Go Home
+  deletable: 1
+  goalList:
+  - name: At Home
+    value: 1
+  finished: 0
 --- !u!1 &1896877307
 GameObject:
   m_ObjectHideFlags: 0

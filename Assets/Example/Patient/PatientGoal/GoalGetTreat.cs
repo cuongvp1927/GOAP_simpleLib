@@ -5,12 +5,12 @@ using UnityEngine;
 using Unity.GOAP.Goal;
 using Unity.GOAP.World;
 
-public class GoalGotoWaitingArea : CGoal
+public class GoalGetTreat : CGoal
 {
     // Right now, the goal state is edited in the Inspector, but can be edit in here
     protected override void Start()
     {
-        //this.goalName = "GotoWaitingArea";
+        //this.goalName = "Get Treat";
         //this.important = 10;
         //this.deletable = true;
 

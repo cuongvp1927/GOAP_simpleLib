@@ -65,7 +65,7 @@ public class ActionGoToRegister : CActionBase
     float timer = 0f;
     public override bool Pos_Perform()
     {
-        timer = timer += Time.deltaTime;
+        timer = timer + Time.deltaTime;
         if (timer >= 2f)
         {
             Debug.Log("Complete performing: " + actionName);
