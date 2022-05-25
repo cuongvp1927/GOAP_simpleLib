@@ -117,11 +117,10 @@ namespace Unity.GOAP.Agent
             {
                 List<CActionBase> alist = new List<CActionBase>(actionList);
                 actionQueue = planner.Plan(g, alist, agentFact);
-
                 if (actionQueue != null)
                 {
                     currentGoal = g;
-                    Debug.Log("Start for goal: " + currentGoal.goalName);
+                    Debug.Log("Agent: " + agentName + " start for goal: " + currentGoal.goalName);
                     break;
                 }
             }
@@ -137,7 +136,7 @@ namespace Unity.GOAP.Agent
             // If the action is performable by checking Pre_performing calculation, default always return true
             if (currentAction.Pre_Perform())
             {
-                Debug.Log("Currently performing: " + currentAction.actionName);
+                Debug.Log("Agent: " + agentName + " currently performing: " + currentAction.actionName);
 
                 currentAction.PerformAction();
             }
@@ -145,7 +144,7 @@ namespace Unity.GOAP.Agent
             // the goal and re-plan.
             else
             {
-                Debug.Log("Can not perform action: " + currentAction.actionName);
+                Debug.Log("Agent: " + agentName + " can not perform action: " + currentAction.actionName);
                 goalList.Remove(currentGoal);
                 BlackListingGoal(currentGoal);
                 GetAGoal();
@@ -179,7 +178,7 @@ namespace Unity.GOAP.Agent
                 // the goal and re-plan.
                 if (currentAction.HasFailed())
                 {
-                    Debug.Log("Action fail to perform performing: " + currentAction.actionName);
+                    Debug.Log("Agent: " + agentName + " fail to perform performing: " + currentAction.actionName);
                     goalList.Remove(currentGoal);
                     BlackListingGoal(currentGoal);
                     GetAGoal();
@@ -224,7 +223,7 @@ namespace Unity.GOAP.Agent
                     // checking the completation of the goal.
                     if (actionQueue.Count <= 0)
                     {
-                        Debug.Log("Complete Goal: " + currentGoal.goalName);
+                        Debug.Log("Agent: " + agentName + " complete Goal: " + currentGoal.goalName);
                         // If goal is satisfied and non repeat, remove from the goal list
                         if (currentGoal.deletable)
                         {

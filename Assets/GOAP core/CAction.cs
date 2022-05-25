@@ -39,6 +39,9 @@ namespace Unity.GOAP.Action {
         {
             preconditions = new CFactManager();
             effects = new CFactManager();
+
+            this.agent = this.gameObject.GetComponent<CAgent>();
+
         }
 
         public virtual void Start()

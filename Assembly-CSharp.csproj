@@ -59,12 +59,16 @@
     <Compile Include="Assets\GOAP core\CAgent.cs" />
     <Compile Include="Assets\Example\Nurse\Nurse.cs" />
     <Compile Include="Assets\Example\Nurse\NurseAction\ActionGetPatient.cs" />
+    <Compile Include="Assets\Example\Patient\PatientAction\ActionGoHome.cs" />
+    <Compile Include="Assets\Example\GoalIdle.cs" />
     <Compile Include="Assets\GOAP core\CAction.cs" />
     <Compile Include="Assets\Example\Nurse\NurseGoal\GoalTreatPatient.cs" />
     <Compile Include="Assets\Example\Patient\PatientAction\ActionGoToRegister.cs" />
     <Compile Include="Assets\Example\Patient\Patient.cs" />
     <Compile Include="Assets\GOAP core\CGoal.cs" />
+    <Compile Include="Assets\Example\Patient\PatientGoal\GoalGoHome.cs" />
     <Compile Include="Assets\GOAP core\World.cs" />
+    <Compile Include="Assets\Example\ActionIdle.cs" />
     <Compile Include="Assets\Example\Patient\PatientAction\ActionGettingTreat.cs" />
     <Compile Include="Assets\Example\Nurse\NurseAction\ActionTreatPatient.cs" />
     <Compile Include="Assets\Example\Patient\PatientGoal\GoalGetTreat.cs" />
@@ -72,8 +76,7 @@
     <Compile Include="Assets\GOAP core\CPlanner.cs" />
     <Compile Include="Assets\GOAP core\WorldStates.cs" />
     <Compile Include="Assets\Example\Patient\PatientAction\ActionGoToWaitingArea.cs" />
-    <Compile Include="Assets\Example\Patient\PatientGoal\GoalGoHome.cs" />
-    <Compile Include="Assets\Example\Patient\PatientAction\ActionGoHome.cs" />
+    <Compile Include="Assets\Example\utility\Spawner.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

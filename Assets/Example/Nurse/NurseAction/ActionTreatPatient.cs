@@ -10,6 +10,8 @@ using Unity.GOAP.Agent;
 public class ActionTreatPatient : CActionBase
 {
     NavMeshAgent navAgent;
+
+    GameObject cube;
     public override void Awake()
     {
         base.Awake();
@@ -20,23 +22,22 @@ public class ActionTreatPatient : CActionBase
 
     public override bool Pre_Perform()
     {
-        GameObject target = null;
         Nurse nurse = (Nurse)agent;
         foreach (GameObject go in nurse.inventory)
         {
             if (go.tag == "Cubicle")
             {
-                target = go;
+                cube = go;
                 break;
             }
         }
 
-        if (target == null)
+        if (cube == null)
         {
             return false;
         }
 
-        agent.position3D = target.transform.position;
+        agent.position3D = cube.transform.position;
         return true;
     }
 
@@ -48,6 +49,9 @@ public class ActionTreatPatient : CActionBase
         {
             Debug.Log("Complete performing: " + actionName);
             this.isActive = false;
+            ResourceManager.Instance.AddCube(cube);
+            Nurse nurse = (Nurse)agent;
+            nurse.inventory.Remove(cube);
             timer = 0;
         }
         return true;

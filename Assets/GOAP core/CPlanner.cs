@@ -68,13 +68,14 @@ namespace Unity.GOAP.Planner
             }
 
             Node startNode = new Node(null, 0, null, listFact.GetFactList());
+
             // Find a plan
             bool hasPlan = FindPlan(startNode, leaves, goal, actionList);
 
             // If do not found a plan
             if (!hasPlan)
             {
-                //Debug.Log("No plan found");
+                Debug.Log("No plan found");
                 return null;
             }
 
@@ -109,12 +110,14 @@ namespace Unity.GOAP.Planner
             return re;
         }
 
-        // Currently, this method find all possible combination of action sequence, with piority given by the cost of each action
+        // Currently, this method find all possible combination of action sequence,
+        // with piority given by the cost of each action
         bool FindPlan(Node parent, List<Node> leaves, CGoal goal, List<CActionBase> actionList) 
         {
             bool foundpath = false;
             // Check doable action
             List<CActionBase> aList = GetDoableActions(parent.currentState, actionList);
+
             var sortedActions = aList.OrderBy(a => a.cost);
 
             // Take out action in order of cost
@@ -142,7 +145,12 @@ namespace Unity.GOAP.Planner
                 else
                 {
                     actionList.Remove(act);
-                    foundpath = FindPlan(child, leaves, goal, actionList);
+                    // This so that if Findplan return false, do not change the value of found path
+                    bool found = FindPlan(child, leaves, goal, actionList);
+                    if (found)
+                    {
+                        foundpath = found;
+                    }
                 }
             }
 
