@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-using Unity.GOAP.Action;
+using Unity.GOAP.ActionBase;
 using Unity.GOAP.Agent;
 public class ActionIdle : CActionBase
 {

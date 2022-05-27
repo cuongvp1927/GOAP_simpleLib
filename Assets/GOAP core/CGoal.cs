@@ -6,13 +6,12 @@ using Unity.GOAP.World;
 
 namespace Unity.GOAP.Goal
 {
-    [System.Serializable]
-    public class CGoal : MonoBehaviour
+    public class CGoal : Node
     {
         public int important = 1;
         public string goalName = "SomeGoal";
-        public bool deletable = true;
-
+        [HideInInspector]public bool deletable = true;
+        
         public List<CFact> goalList;
 
         public CFactManager goals;

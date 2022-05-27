@@ -2,20 +2,20 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-using Unity.GOAP.Action;
+using Unity.GOAP.ActionBase;
 using Unity.GOAP.Goal;
 using Unity.GOAP.World;
 
 namespace Unity.GOAP.Planner
 {
-    class Node
+    class GraphNode
     {
-        public Node parent;
+        public GraphNode parent;
         public CActionBase action;
         public int cost;
         public CFactManager currentState;
 
-        public Node (Node parent, int cost, CActionBase action, List<CFact> states)
+        public GraphNode(GraphNode parent, int cost, CActionBase action, List<CFact> states)
         {
             this.parent = parent;
             this.cost = cost;
@@ -58,7 +58,7 @@ namespace Unity.GOAP.Planner
         // If have time, improve it with State table and better search algorithm for better performance
         public Queue<CActionBase> Plan(CGoal goal, List<CActionBase> actionList, CFactManager agentFact)
         {
-            List<Node> leaves = new List<Node>();
+            List<GraphNode> leaves = new List<GraphNode>();
             // The first node have no parent, no action, no cost, and take the current world state and agent states as current state
             CFactManager listFact = new CFactManager(CWorld.Instance.GetFacts().GetFactList());
 
@@ -67,7 +67,7 @@ namespace Unity.GOAP.Planner
                 listFact.AddFact(f);
             }
 
-            Node startNode = new Node(null, 0, null, listFact.GetFactList());
+            GraphNode startNode = new GraphNode(null, 0, null, listFact.GetFactList());
 
             // Find a plan
             bool hasPlan = FindPlan(startNode, leaves, goal, actionList);
@@ -80,8 +80,8 @@ namespace Unity.GOAP.Planner
             }
 
             // Get the cheapest plan
-            Node cheapestLeaf = leaves[0];
-            foreach (Node l in leaves)
+            GraphNode cheapestLeaf = leaves[0];
+            foreach (GraphNode l in leaves)
             {
                 if (l.cost < cheapestLeaf.cost)
                 {
@@ -112,7 +112,7 @@ namespace Unity.GOAP.Planner
 
         // Currently, this method find all possible combination of action sequence,
         // with piority given by the cost of each action
-        bool FindPlan(Node parent, List<Node> leaves, CGoal goal, List<CActionBase> actionList) 
+        bool FindPlan(GraphNode parent, List<GraphNode> leaves, CGoal goal, List<CActionBase> actionList) 
         {
             bool foundpath = false;
             // Check doable action
@@ -133,7 +133,7 @@ namespace Unity.GOAP.Planner
                     }
                 }
                 // Create new node as the next node of graph
-                Node child = new Node(parent, parent.cost + act.cost, act, states.GetFactList());
+                GraphNode child = new GraphNode(parent, parent.cost + act.cost, act, states.GetFactList());
 
                 // If the goal is complete by this action, this action is a leaf, and a plan is found
                 if (goal.IsSatified(states))

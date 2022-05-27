@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 using Unity.GOAP.Agent;
-using Unity.GOAP.Action;
+using Unity.GOAP.ActionBase;
 using Unity.GOAP.World;
 
 [RequireComponent(typeof(NavMeshAgent))]
@@ -17,8 +17,8 @@ public class ActionGoToWaitingArea : CActionBase
     {
         base.Awake();
 
-        this.navAgent = this.gameObject.GetComponent<NavMeshAgent>();
-        this.agent = this.gameObject.GetComponent<CAgent>();
+        //this.navAgent = this.gameObject.GetComponent<NavMeshAgent>();
+        //this.agent = this.gameObject.GetComponent<CAgent>();
     }
 
     public override bool Pre_Perform()

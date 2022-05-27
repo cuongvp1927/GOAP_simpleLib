@@ -4,10 +4,8 @@ using UnityEngine;
 
 using Unity.GOAP.World;
 using Unity.GOAP.Agent;
-
-namespace Unity.GOAP.Action {
-    [System.Serializable]
-    public abstract class CActionBase: MonoBehaviour
+namespace Unity.GOAP.ActionBase {
+    public class CActionBase : Node
     {
         public int cost = 1;
         public string actionName = "New Action";
@@ -40,8 +38,7 @@ namespace Unity.GOAP.Action {
             preconditions = new CFactManager();
             effects = new CFactManager();
 
-            this.agent = this.gameObject.GetComponent<CAgent>();
-
+            //this.agent = this.gameObject.GetComponent<CAgent>();
         }
 
         public virtual void Start()
@@ -66,12 +63,21 @@ namespace Unity.GOAP.Action {
         }
 
         // Check complete, required
-        public abstract bool HasCompleted();
+        public virtual bool HasCompleted()
+        {
+            return true;
+        }
         // Check if failed, required
-        public abstract bool HasFailed();
+        public virtual bool HasFailed()
+        {
+            return false;
+        }
 
         // Main action, required
-        public abstract bool PerformAction();
+        public virtual bool PerformAction()
+        {
+            return false;
+        }
         // Pre calculation if needed, return true to start performing the action.
         public virtual bool Pre_Perform()
         {
@@ -86,5 +92,7 @@ namespace Unity.GOAP.Action {
             isActive = false;
             return true;
         }
+
+        [HideInInspector]public List<Node> childiren = new List<Node>();
     }
 }

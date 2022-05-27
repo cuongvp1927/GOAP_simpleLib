@@ -4,10 +4,9 @@ using UnityEngine;
 using System.Linq;
 
 using Unity.GOAP.World;
-using Unity.GOAP.Action;
+using Unity.GOAP.ActionBase;
 using Unity.GOAP.Goal;
 using Unity.GOAP.Planner;
-
 
 namespace Unity.GOAP.Agent
 {
@@ -66,21 +65,21 @@ namespace Unity.GOAP.Agent
         protected void ResetActionList()
         {
             actionList = new List<CActionBase>();
-            CActionBase[] acts = this.GetComponents<CActionBase>();
-            foreach (CActionBase a in acts)
-            {
-                actionList.Add(a);
-            }
+            //CActionBase[] acts = this.GetComponents<CActionBase>();
+            //foreach (CActionBase a in acts)
+            //{
+            //    actionList.Add(a);
+            //}
         }
 
         protected void ResetGoalList()
         {
             goalList = new List<CGoal>();
-            CGoal[] gos = this.GetComponents<CGoal>();
-            foreach (CGoal g in gos)
-            {
-                goalList.Add(g);
-            }
+            //CGoal[] gos = this.GetComponents<CGoal>();
+            //foreach (CGoal g in gos)
+            //{
+            //    goalList.Add(g);
+            //}
             goalBlacklist = new List<CGoal>();
         }
 
