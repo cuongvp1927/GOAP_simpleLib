@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using World;
-namespace Action {
-    public abstract class CActionBase: MonoBehaviour
+namespace ActionBase {
+    public class CActionBase : Node
     {
         public int cost = 1;
         public string actionName = "New Action";
@@ -15,12 +15,12 @@ namespace Action {
 
         CAgent agent;
 
-        public bool isActive = false;
-        public bool isInteruptable = false;
-        public bool forceReplan = false;
+        [HideInInspector]public bool isActive = false;
+        [HideInInspector]public bool isInteruptable = false;
+        [HideInInspector]public bool forceReplan = false;
 
-        public bool isComplete;
-        public bool isFail;
+        [HideInInspector]public bool isComplete;
+        [HideInInspector]public bool isFail;
 
         public void Awake()
         {
@@ -30,9 +30,12 @@ namespace Action {
             isComplete = false;
             isFail = false;
         }
-
+        
         // Main action, required
-        public abstract bool PerformAction();
+        public virtual bool PerformAction()
+        {
+            return false;
+        }
         // Pre calculation if needed, return true to start performing the action.
         public virtual bool Pre_Perform()
         {
@@ -44,5 +47,7 @@ namespace Action {
             isFail = false;
             return true;
         }
+
+        [HideInInspector]public List<Node> childiren = new List<Node>();
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 
 using World;
-using Action;
+using ActionBase;
 using Goal;
 using Planner;
 
@@ -18,6 +18,7 @@ public class CAgent : MonoBehaviour
     public List<CGoal> goalList;
     protected List<CActionBase> possibleAction;
     public List<CGoal> goalBlacklist;
+    
     protected Queue<CActionBase> actionQueue;
     protected CActionBase currentAction;
     protected CGoal currentGoal;
@@ -96,7 +97,7 @@ public class CAgent : MonoBehaviour
             }
         }
     }
-
+    
     protected virtual void LateUpdate()
     {
         // Check if currently running any action
