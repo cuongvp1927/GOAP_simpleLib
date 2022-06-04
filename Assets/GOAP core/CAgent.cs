@@ -22,7 +22,7 @@ namespace Unity.GOAP.Agent
         public List<CGoal> goalList;
         public List<CGoal> goalBlacklist;
 
-        public Vector3 position3D;
+        [HideInInspector] public Vector3 position3D;
 
         protected List<CActionBase> possibleAction;
         protected Queue<CActionBase> actionQueue;
@@ -35,16 +35,21 @@ namespace Unity.GOAP.Agent
 
         protected virtual void Awake()
         {
-            ResetActionList();
-            ResetGoalList();
-            agentFact = new CFactManager();
         }
 
         protected virtual void Start()
         {
-            //Debug.Log("Started");
-            //ResetActionList();
-            //ResetGoalList();
+            agentFact = new CFactManager();
+
+            foreach (CActionBase a in actionList)
+            {
+                a.Initiate();
+            }
+
+            foreach (CGoal g in goalList)
+            {
+                g.Initiate();
+            }
         }
 
         protected void AddAction(CActionBase action)
@@ -60,27 +65,6 @@ namespace Unity.GOAP.Agent
             {
                 this.goalList.Add(goal);
             }
-        }
-
-        protected void ResetActionList()
-        {
-            actionList = new List<CActionBase>();
-            //CActionBase[] acts = this.GetComponents<CActionBase>();
-            //foreach (CActionBase a in acts)
-            //{
-            //    actionList.Add(a);
-            //}
-        }
-
-        protected void ResetGoalList()
-        {
-            goalList = new List<CGoal>();
-            //CGoal[] gos = this.GetComponents<CGoal>();
-            //foreach (CGoal g in gos)
-            //{
-            //    goalList.Add(g);
-            //}
-            goalBlacklist = new List<CGoal>();
         }
 
         // Called after t time to reset blacklist back to goal list
@@ -133,11 +117,11 @@ namespace Unity.GOAP.Agent
         protected virtual void PerformAction(CActionBase action) 
         {
             // If the action is performable by checking Pre_performing calculation, default always return true
-            if (currentAction.Pre_Perform())
+            if (currentAction.Pre_Perform(this))
             {
                 Debug.Log("Agent: " + agentName + " currently performing: " + currentAction.actionName);
 
-                currentAction.PerformAction();
+                currentAction.PerformAction(this);
             }
             // If checking Pre_performing false, meaning the action is unable to perform for some reason, temporary remove 
             // the goal and re-plan.
@@ -152,7 +136,7 @@ namespace Unity.GOAP.Agent
         }
 
         float timer = 0f;
-        protected virtual void LateUpdate()
+        protected virtual void FixedUpdate()
         {
             // After every x sec, reset the blacklist, this can be changed to different counter methods
             timer = timer += Time.deltaTime;
@@ -175,7 +159,7 @@ namespace Unity.GOAP.Agent
 
                 // If durring perfoming action, things happen that cause the action to fail, temporary remove 
                 // the goal and re-plan.
-                if (currentAction.HasFailed())
+                if (currentAction.HasFailed(this))
                 {
                     Debug.Log("Agent: " + agentName + " fail to perform performing: " + currentAction.actionName);
                     goalList.Remove(currentGoal);
@@ -185,10 +169,10 @@ namespace Unity.GOAP.Agent
                 }
 
                 // Check if the current action has complete yet?
-                if (currentAction.HasCompleted())
+                if (currentAction.HasCompleted(this))
                 {
                     // Do pos calculation and switch to the next action
-                    currentAction.Pos_Perform();
+                    currentAction.Pos_Perform(this);
                     if (currentAction.forceReplan == true)
                     {
                         GetAGoal();
@@ -247,6 +231,7 @@ namespace Unity.GOAP.Agent
                     return;
                 }
             }
+
         }
     }
 

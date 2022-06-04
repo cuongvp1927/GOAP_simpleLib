@@ -1,26 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 using Unity.GOAP.ActionBase;
 using Unity.GOAP.Agent;
 
-[RequireComponent(typeof(NavMeshAgent))]
 public class ActionTreatPatient : CActionBase
 {
-    NavMeshAgent navAgent;
-
     GameObject cube;
-    public override void Awake()
-    {
-        base.Awake();
 
-        //this.navAgent = this.gameObject.GetComponent<NavMeshAgent>();
-        //this.agent = this.gameObject.GetComponent<CAgent>();
-    }
-
-    public override bool Pre_Perform()
+    public override bool Pre_Perform(CAgent agent)
     {
         Nurse nurse = (Nurse)agent;
         foreach (GameObject go in nurse.inventory)
@@ -42,7 +31,7 @@ public class ActionTreatPatient : CActionBase
     }
 
     float timer = 0f;
-    public override bool Pos_Perform()
+    public override bool Pos_Perform(CAgent agent)
     {
         timer = timer + Time.deltaTime;
         if (timer >= 2f)
@@ -56,27 +45,30 @@ public class ActionTreatPatient : CActionBase
         }
         return true;
     }
-    public override bool PerformAction()
+    public override bool PerformAction(CAgent agent)
     {
-        navAgent.SetDestination(agent.position3D);
+        Nurse nurse = (Nurse)agent;
+        nurse.navAgent.SetDestination(agent.position3D);
         isActive = true;
         return true;
     }
-    public override bool HasCompleted()
+    public override bool HasCompleted(CAgent agent)
     {
-        if (navAgent.remainingDistance < 2f)
+        Nurse nurse = (Nurse)agent;
+        if (nurse.navAgent.remainingDistance < 2f)
             return true;
         return false;
     }
 
-    public override bool HasFailed()
+    public override bool HasFailed(CAgent agent)
     {
-        if (HasCompleted())
+        if (HasCompleted(agent))
         {
             return false;
         }
+        Nurse nurse = (Nurse)agent;
 
-        if (navAgent.enabled && !navAgent.hasPath && !navAgent.pathPending && navAgent.remainingDistance == 0)
+        if (nurse.navAgent.enabled && !nurse.navAgent.hasPath && !nurse.navAgent.pathPending && nurse.navAgent.remainingDistance == 0)
         {
             return true;
         }

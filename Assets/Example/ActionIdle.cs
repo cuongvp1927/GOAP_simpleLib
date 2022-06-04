@@ -7,18 +7,14 @@ using Unity.GOAP.ActionBase;
 using Unity.GOAP.Agent;
 public class ActionIdle : CActionBase
 {
-    public override void Awake()
-    {
-        base.Awake();
-    }
 
-    public override bool Pre_Perform()
+    public override bool Pre_Perform(CAgent agent)
     {
         return true;
     }
 
     float timer = 0f;
-    public override bool Pos_Perform()
+    public override bool Pos_Perform(CAgent agent)
     {
         timer = timer + Time.deltaTime;
         if (timer >= 1f)
@@ -30,18 +26,18 @@ public class ActionIdle : CActionBase
 
         return true;
     }
-    public override bool PerformAction()
+    public override bool PerformAction(CAgent agent)
     {
         isActive = true;
         return true;
     }
 
-    public override bool HasCompleted()
+    public override bool HasCompleted(CAgent agent)
     {
         return true;
     }
 
-    public override bool HasFailed()
+    public override bool HasFailed(CAgent agent)
     {
         return false;
     }

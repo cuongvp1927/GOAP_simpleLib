@@ -1,26 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 using Unity.GOAP.ActionBase;
 using Unity.GOAP.Agent;
 
-[RequireComponent(typeof(NavMeshAgent))]
 public class ActionGetPatient : CActionBase
 {
-    NavMeshAgent navAgent;
     Patient patient;
     GameObject cube;
-
-    public override void Awake()
-    {
-        base.Awake();
-
-        //this.navAgent = this.gameObject.GetComponent<NavMeshAgent>();
-        //this.agent = this.gameObject.GetComponent<CAgent>();
-    }
-    public override bool Pre_Perform()
+    public override bool Pre_Perform(CAgent agent)
     {
         cube = ResourceManager.Instance.RemoveCube();
         if (cube == null)
@@ -39,39 +28,41 @@ public class ActionGetPatient : CActionBase
         return true;
     }
 
-    public override bool Pos_Perform()
+    public override bool Pos_Perform(CAgent agent)
     {
         patient.inventory.Add(cube);
 
         Nurse nurse = (Nurse)agent;
         nurse.inventory.Add(cube);
 
-        return base.Pos_Perform();
+        return base.Pos_Perform(agent);
     }
 
-    public override bool HasCompleted()
+    public override bool HasCompleted(CAgent agent)
     {
-        if (navAgent.remainingDistance < 2f)
+        Nurse nurse = (Nurse)agent;
+        if (nurse.navAgent.remainingDistance < 1f)
             return true;
         return false;
     }
-    public override bool HasFailed()
+    public override bool HasFailed(CAgent agent)
     {
-        if (HasCompleted())
+        if (HasCompleted(agent))
         {
             return false;
         }
-
-        if (navAgent.enabled && !navAgent.hasPath && !navAgent.pathPending && navAgent.remainingDistance == 0)
+        Nurse nurse = (Nurse)agent;
+        if (nurse.navAgent.enabled && !nurse.navAgent.hasPath && !nurse.navAgent.pathPending && nurse.navAgent.remainingDistance == 0)
         {
             return true;
         }
         return false;
     }
 
-    public override bool PerformAction()
+    public override bool PerformAction(CAgent agent)
     {
-        navAgent.SetDestination(agent.position3D);
+        Nurse nurse = (Nurse)agent;
+        nurse.navAgent.SetDestination(agent.position3D);
         isActive = true;
 
         return true;

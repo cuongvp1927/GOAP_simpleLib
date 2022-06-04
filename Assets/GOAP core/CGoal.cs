@@ -10,14 +10,13 @@ namespace Unity.GOAP.Goal
     {
         public int important = 1;
         public string goalName = "SomeGoal";
-        [HideInInspector]public bool deletable = true;
+        public bool deletable = true;
         
         public List<CFact> goalList;
 
         public CFactManager goals;
-        public bool finished = false;
 
-        protected virtual void Start()
+        public virtual void Initiate()
         {
             goals = new CFactManager(goalList);
         }

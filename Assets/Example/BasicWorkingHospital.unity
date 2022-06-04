@@ -495,11 +495,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agentName: Nurse
-  actionList: []
-  goalList: []
+  actionList:
+  - {fileID: -715783980652896768, guid: ee5a807015fd0ad4ca94c2d2bd5d0505, type: 2}
+  - {fileID: -2920987141191554653, guid: ee5a807015fd0ad4ca94c2d2bd5d0505, type: 2}
+  - {fileID: -920529363895258237, guid: ee5a807015fd0ad4ca94c2d2bd5d0505, type: 2}
+  goalList:
+  - {fileID: -7279900739171885854, guid: ee5a807015fd0ad4ca94c2d2bd5d0505, type: 2}
+  - {fileID: 2494193911728708538, guid: ee5a807015fd0ad4ca94c2d2bd5d0505, type: 2}
   goalBlacklist: []
   position3D: {x: 0, y: 0, z: 0}
   inventory: []
+  navAgent: {fileID: 0}
 --- !u!195 &498185296
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2477,7 +2483,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1445562788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4395,6 +4401,46 @@ PrefabInstance:
       propertyPath: m_Name
       value: Patient
       objectReference: {fileID: 0}
+    - target: {fileID: 5173311207482723475, guid: 307c49a02065d2e419f1060006b9ed26, type: 3}
+      propertyPath: goalList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5173311207482723475, guid: 307c49a02065d2e419f1060006b9ed26, type: 3}
+      propertyPath: actionList.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5173311207482723475, guid: 307c49a02065d2e419f1060006b9ed26, type: 3}
+      propertyPath: goalList.Array.data[0]
+      value: 
+      objectReference: {fileID: 3342817985221454690, guid: ee5a807015fd0ad4ca94c2d2bd5d0505, type: 2}
+    - target: {fileID: 5173311207482723475, guid: 307c49a02065d2e419f1060006b9ed26, type: 3}
+      propertyPath: goalList.Array.data[1]
+      value: 
+      objectReference: {fileID: -1372362318619537931, guid: ee5a807015fd0ad4ca94c2d2bd5d0505, type: 2}
+    - target: {fileID: 5173311207482723475, guid: 307c49a02065d2e419f1060006b9ed26, type: 3}
+      propertyPath: goalList.Array.data[2]
+      value: 
+      objectReference: {fileID: 2494193911728708538, guid: ee5a807015fd0ad4ca94c2d2bd5d0505, type: 2}
+    - target: {fileID: 5173311207482723475, guid: 307c49a02065d2e419f1060006b9ed26, type: 3}
+      propertyPath: actionList.Array.data[0]
+      value: 
+      objectReference: {fileID: 4354766079072027110, guid: ee5a807015fd0ad4ca94c2d2bd5d0505, type: 2}
+    - target: {fileID: 5173311207482723475, guid: 307c49a02065d2e419f1060006b9ed26, type: 3}
+      propertyPath: actionList.Array.data[1]
+      value: 
+      objectReference: {fileID: -7928937293650679930, guid: ee5a807015fd0ad4ca94c2d2bd5d0505, type: 2}
+    - target: {fileID: 5173311207482723475, guid: 307c49a02065d2e419f1060006b9ed26, type: 3}
+      propertyPath: actionList.Array.data[2]
+      value: 
+      objectReference: {fileID: 6276497623162354000, guid: ee5a807015fd0ad4ca94c2d2bd5d0505, type: 2}
+    - target: {fileID: 5173311207482723475, guid: 307c49a02065d2e419f1060006b9ed26, type: 3}
+      propertyPath: actionList.Array.data[3]
+      value: 
+      objectReference: {fileID: 2633176008586717941, guid: ee5a807015fd0ad4ca94c2d2bd5d0505, type: 2}
+    - target: {fileID: 5173311207482723475, guid: 307c49a02065d2e419f1060006b9ed26, type: 3}
+      propertyPath: actionList.Array.data[4]
+      value: 
+      objectReference: {fileID: -920529363895258237, guid: ee5a807015fd0ad4ca94c2d2bd5d0505, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 307c49a02065d2e419f1060006b9ed26, type: 3}
 --- !u!1001 &7197366530890070328

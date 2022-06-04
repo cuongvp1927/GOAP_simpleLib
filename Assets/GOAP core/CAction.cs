@@ -24,27 +24,22 @@ namespace Unity.GOAP.ActionBase {
         // The effect to the world state, does not affect the agent's state
         public List<CFact> worldEffects;
 
-        protected CAgent agent;
+        [HideInInspector] protected CAgent agent;
 
-        public bool isActive = false;
-        public bool isInteruptable = false;
-        public bool forceReplan = false;
+        [HideInInspector] public bool isActive = false;
+        [HideInInspector] public bool isInteruptable = false;
+        [HideInInspector] public bool forceReplan = false;
 
-        public CFactManager preconditions;
-        public CFactManager effects;
+        [HideInInspector] public CFactManager preconditions;
+        [HideInInspector] public CFactManager effects;
 
-        public virtual void Awake()
+        public virtual void Initiate()
         {
             preconditions = new CFactManager();
             effects = new CFactManager();
-
-            //this.agent = this.gameObject.GetComponent<CAgent>();
-        }
-
-        public virtual void Start()
-        {
+            
             foreach (CFact f in PreConditions)
-            { 
+            {
                 preconditions.AddFact(f.name, f.value);
             }
 
@@ -63,29 +58,29 @@ namespace Unity.GOAP.ActionBase {
         }
 
         // Check complete, required
-        public virtual bool HasCompleted()
+        public virtual bool HasCompleted(CAgent agent)
         {
             return true;
         }
         // Check if failed, required
-        public virtual bool HasFailed()
+        public virtual bool HasFailed(CAgent agent)
         {
             return false;
         }
 
         // Main action, required
-        public virtual bool PerformAction()
+        public virtual bool PerformAction(CAgent agent)
         {
             return false;
         }
         // Pre calculation if needed, return true to start performing the action.
-        public virtual bool Pre_Perform()
+        public virtual bool Pre_Perform(CAgent agent)
         {
             isActive = true;
             return true;
         }
         // Pos calculation if needed.
-        public virtual bool Pos_Perform()
+        public virtual bool Pos_Perform(CAgent agent)
         {
 
             Debug.Log("Complete performing: " + actionName);

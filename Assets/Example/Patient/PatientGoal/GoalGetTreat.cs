@@ -8,7 +8,7 @@ using Unity.GOAP.World;
 public class GoalGetTreat : CGoal
 {
     // Right now, the goal state is edited in the Inspector, but can be edit in here
-    protected override void Start()
+    public override void Initiate()
     {
         //this.goalName = "Get Treat";
         //this.important = 10;
@@ -18,7 +18,7 @@ public class GoalGetTreat : CGoal
         //this.goals = new List<CFact>();
         //CFact g1 = new CFact("Arrived at the waiting area", 1);
 
-        base.Start();
+        base.Initiate();
     }
 
 }
