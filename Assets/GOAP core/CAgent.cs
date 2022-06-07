@@ -29,6 +29,8 @@ namespace Unity.GOAP.Agent
         protected CActionBase currentAction;
         protected CGoal currentGoal;
 
+        [SerializeField] protected AgentView agentView;
+
         protected CPlanner planner;
 
         bool interupt = false;
@@ -41,15 +43,21 @@ namespace Unity.GOAP.Agent
         {
             agentFact = new CFactManager();
 
-            foreach (CActionBase a in actionList)
+            actionList = new List<CActionBase>();
+            goalList = new List<CGoal>();
+
+            foreach (CActionBase a in agentView.actions)
             {
                 a.Initiate();
+                actionList.Add(a);
             }
 
-            foreach (CGoal g in goalList)
+            foreach (CGoal g in agentView.goals)
             {
                 g.Initiate();
+                goalList.Add(g);
             }
+
         }
 
         protected void AddAction(CActionBase action)

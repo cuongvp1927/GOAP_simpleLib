@@ -8,8 +8,8 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Patient : CAgent
 {
-    public List<GameObject> inventory;
-    public NavMeshAgent navAgent;
+    [HideInInspector] public List<GameObject> inventory;
+    [HideInInspector] public NavMeshAgent navAgent;
 
     protected override void Awake()
     {
