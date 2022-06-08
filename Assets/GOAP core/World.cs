@@ -61,7 +61,7 @@ namespace Unity.GOAP.World
             }
             else
             {
-                facts.Add(fact);
+                facts.Add(new CFact(name, value));
             }
         }
         public void AddFact(string name, int value)

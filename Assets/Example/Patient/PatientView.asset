@@ -24,7 +24,7 @@ MonoBehaviour:
   - name: Treated
     value: 1
   worldEffects: []
-  isActive: 0
+  isActive: 1
   isInteruptable: 0
   forceReplan: 0
   childiren:
@@ -46,7 +46,7 @@ MonoBehaviour:
   position: {x: 874.4, y: 332.50253}
   important: 0
   goalName: SomeGoal
-  deletable: 1
+  deletable: 0
   goalList:
   - name: BeingIdle
     value: 1
@@ -74,7 +74,7 @@ MonoBehaviour:
   - name: AtWaitingArea
     value: 1
   worldEffects: []
-  isActive: 1
+  isActive: 0
   isInteruptable: 0
   forceReplan: 0
   childiren:

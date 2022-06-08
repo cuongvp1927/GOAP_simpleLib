@@ -504,6 +504,7 @@ MonoBehaviour:
   - {fileID: 2494193911728708538, guid: ee5a807015fd0ad4ca94c2d2bd5d0505, type: 2}
   goalBlacklist: []
   position3D: {x: 0, y: 0, z: 0}
+  agentView: {fileID: 11400000, guid: 7b3cd317eb1ef1e45bde30ddd1a7d3c4, type: 2}
   inventory: []
   navAgent: {fileID: 0}
 --- !u!195 &498185296
@@ -4401,6 +4402,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Patient
       objectReference: {fileID: 0}
+    - target: {fileID: 5173311207482723475, guid: 307c49a02065d2e419f1060006b9ed26, type: 3}
+      propertyPath: agentView
+      value: 
+      objectReference: {fileID: 11400000, guid: 1a395140668d06e4b8aafba0789d1c4c, type: 2}
     - target: {fileID: 5173311207482723475, guid: 307c49a02065d2e419f1060006b9ed26, type: 3}
       propertyPath: goalList.Array.size
       value: 3

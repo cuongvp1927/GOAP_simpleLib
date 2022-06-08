@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: GoalIdle
   m_EditorClassIdentifier: 
   guid: 5176abb7fd4029045b2910529e7a81eb
-  position: {x: 734.39996, y: 125.02096}
+  position: {x: 597.60004, y: 265.6}
   important: 1
-  goalName: SomeGoal
-  deletable: 1
-  goalList: []
+  goalName: Idle
+  deletable: 0
+  goalList:
+  - name: beingIdle
+    value: 1
 --- !u!114 &-6955196900492744778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31,11 +33,13 @@ MonoBehaviour:
   m_Name: GoalTreatPatient
   m_EditorClassIdentifier: 
   guid: 5848c808b5eae4043819f72b7ca5c1e3
-  position: {x: 733.86755, y: 0.000009964235}
-  important: 1
-  goalName: SomeGoal
-  deletable: 1
-  goalList: []
+  position: {x: 597.60004, y: 140.79999}
+  important: 10
+  goalName: Treat Patient
+  deletable: 0
+  goalList:
+  - name: TreatPatient
+    value: 1
 --- !u!114 &-1132410353846251130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49,17 +53,20 @@ MonoBehaviour:
   m_Name: ActionGetPatient
   m_EditorClassIdentifier: 
   guid: 6c2dea5498a333a419ef32c9c21daf45
-  position: {x: 0, y: 0}
+  position: {x: 116.465645, y: 140.79999}
   cost: 1
-  actionName: New Action
+  actionName: Get Patient
   PreConditions: []
-  Effects: []
+  Effects:
+  - name: hasPatient
+    value: 1
   agentEffects: []
   worldEffects: []
   isActive: 0
   isInteruptable: 0
   forceReplan: 0
-  childiren: []
+  childiren:
+  - {fileID: 9005186711389168410}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,17 +100,20 @@ MonoBehaviour:
   m_Name: ActionIdle
   m_EditorClassIdentifier: 
   guid: f080f882b935ef54d94eaf3e53190a69
-  position: {x: 0, y: 0}
+  position: {x: 348.80002, y: 265.60007}
   cost: 1
-  actionName: New Action
+  actionName: Idle
   PreConditions: []
-  Effects: []
+  Effects:
+  - name: beingIdle
+    value: 1
   agentEffects: []
   worldEffects: []
   isActive: 0
   isInteruptable: 0
   forceReplan: 0
-  childiren: []
+  childiren:
+  - {fileID: -9009843697159381679}
 --- !u!114 &9005186711389168410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,14 +127,19 @@ MonoBehaviour:
   m_Name: ActionTreatPatient
   m_EditorClassIdentifier: 
   guid: d0138ba8dbae14441bdf0faa3b24f3f5
-  position: {x: 220.78166, y: 0.000009964235}
+  position: {x: 348.481, y: 140.98108}
   cost: 1
-  actionName: New Action
-  PreConditions: []
-  Effects: []
+  actionName: Treat Patient
+  PreConditions:
+  - name: hasPatient
+    value: 1
+  Effects:
+  - name: TreatPatient
+    value: 1
   agentEffects: []
   worldEffects: []
-  isActive: 0
+  isActive: 1
   isInteruptable: 0
   forceReplan: 0
-  childiren: []
+  childiren:
+  - {fileID: -6955196900492744778}

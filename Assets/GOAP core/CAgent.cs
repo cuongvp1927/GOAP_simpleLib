@@ -194,12 +194,12 @@ namespace Unity.GOAP.Agent
                     // Adding 
                     foreach (CFact f2 in currentAction.worldEffects)
                     {
-                        CWorld.Instance.GetFacts().AddFact(f2);
+                        CWorld.Instance.GetFacts().ChangeFact(f2.name, f2.value);
                     }
 
                     foreach (CFact f2 in currentAction.agentEffects)
                     {
-                        agentFact.AddFact(f2);
+                        agentFact.ChangeFact(f2.name, f2.value);
                     }
                     return;
                 }
