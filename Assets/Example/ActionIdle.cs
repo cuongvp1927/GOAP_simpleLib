@@ -7,7 +7,6 @@ using Unity.GOAP.ActionBase;
 using Unity.GOAP.Agent;
 public class ActionIdle : CActionBase
 {
-
     public override bool Pre_Perform(CAgent agent)
     {
         return true;

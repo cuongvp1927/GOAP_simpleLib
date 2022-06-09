@@ -49,7 +49,7 @@ namespace Unity.GOAP.World
 
         public CFact GetFact(string name)
         {
-            return facts.Find(fa => fa.name == name);
+            return facts.Find(fa => fa.name == name); 
         }
 
         public void ChangeFact(string name, int value)
@@ -61,7 +61,7 @@ namespace Unity.GOAP.World
             }
             else
             {
-                facts.Add(fact);
+                facts.Add(new CFact(name, value));
             }
         }
         public void AddFact(string name, int value)
@@ -128,7 +128,15 @@ namespace Unity.GOAP.World
         public CFactManager GetFacts()
         {
             return factManager;
-        } 
+        }
+
+        public void PrintFact()
+        {
+            foreach (var VARIABLE in factManager.GetFactList())
+            {
+                Debug.LogError(VARIABLE.name +" " + VARIABLE.value);
+            }
+        }
 
     }
 
