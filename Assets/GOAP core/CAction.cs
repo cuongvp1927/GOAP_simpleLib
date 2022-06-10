@@ -76,7 +76,6 @@ namespace Unity.GOAP.ActionBase {
         // Pre calculation if needed, return true to start performing the action.
         public virtual bool Pre_Perform(CAgent agent)
         {
-            isActive = true;
             return true;
         }
         // Pos calculation if needed.
@@ -84,7 +83,6 @@ namespace Unity.GOAP.ActionBase {
         {
 
             Debug.Log("Complete performing: " + actionName);
-            isActive = false;
             return true;
         }
 

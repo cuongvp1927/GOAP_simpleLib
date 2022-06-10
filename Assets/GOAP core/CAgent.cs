@@ -128,7 +128,7 @@ namespace Unity.GOAP.Agent
             if (currentAction.Pre_Perform(this))
             {
                 Debug.Log("Agent: " + agentName + " currently performing: " + currentAction.actionName);
-
+                currentAction.isActive = true;
                 currentAction.PerformAction(this);
             }
             // If checking Pre_performing false, meaning the action is unable to perform for some reason, temporary remove 
@@ -180,6 +180,7 @@ namespace Unity.GOAP.Agent
                 if (currentAction.HasCompleted(this))
                 {
                     // Do pos calculation and switch to the next action
+                    currentAction.isActive = false;
                     currentAction.Pos_Perform(this);
                     if (currentAction.forceReplan == true)
                     {
