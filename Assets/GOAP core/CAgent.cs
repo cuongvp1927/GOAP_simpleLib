@@ -18,9 +18,9 @@ namespace Unity.GOAP.Agent
         // This opposited to the world states, where all agent get access.
         public CFactManager agentFact;
 
-        public List<CActionBase> actionList;
-        public List<CGoal> goalList;
-        public List<CGoal> goalBlacklist;
+        [HideInInspector] public List<CActionBase> actionList;
+        [HideInInspector] public List<CGoal> goalList;
+        [HideInInspector] public List<CGoal> goalBlacklist;
 
         [HideInInspector] public Vector3 position3D;
 
