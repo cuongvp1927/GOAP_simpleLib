@@ -21,8 +21,9 @@ public class ActionGoHome : CActionBase
 
     public override bool Pos_Perform(CAgent agent)
     {
-        //Destroy(this.gameObject);
+        Debug.Log("Complete performing: " + actionName);
         isActive = false;
+        //Destroy(this.gameObject);
         return true;
     }
 

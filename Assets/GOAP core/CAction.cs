@@ -81,7 +81,6 @@ namespace Unity.GOAP.ActionBase {
         // Pos calculation if needed.
         public virtual bool Pos_Perform(CAgent agent)
         {
-
             Debug.Log("Complete performing: " + actionName);
             return true;
         }

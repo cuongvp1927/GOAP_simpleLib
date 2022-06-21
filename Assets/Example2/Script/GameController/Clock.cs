@@ -63,8 +63,8 @@ public class Clock : MonoBehaviour
                     {
                         day += 1;
                     }
-                    AddFactToWorld();
                 }
+                AddFactToWorld();
             }
             timer = 0;
         }
@@ -102,13 +102,13 @@ public class Clock : MonoBehaviour
             CWorld.Instance.GetFacts().ChangeFact("workingDay", 1);
             CWorld.Instance.GetFacts().ChangeFact("offDay", 0);
 
-            if (hour >= 0 && hour <= 16)
+            if (hour >= 7 && hour <= 17)
             {
-                CWorld.Instance.GetFacts().ChangeFact("relaxingTime", 1);
+                CWorld.Instance.GetFacts().ChangeFact("relaxingTime", 0);
             }
             else
             {
-                CWorld.Instance.GetFacts().ChangeFact("relaxingTime", 0);
+                CWorld.Instance.GetFacts().ChangeFact("relaxingTime", 1);
             }
         }
         else

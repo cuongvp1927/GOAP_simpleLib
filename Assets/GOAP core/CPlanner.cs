@@ -28,7 +28,6 @@ namespace Unity.GOAP.Planner
     {
         public CPlanner() {}
 
-        #region UtilityFunction
         List<CActionBase> GetDoableActions(CFactManager curState, List<CActionBase> actionList)
         {
             List<CActionBase> doableAction = new List<CActionBase>();
@@ -37,22 +36,32 @@ namespace Unity.GOAP.Planner
             {
                 bool doable = true;
 
+                // Check if precondition is true
                 foreach (CFact fact in act.preconditions.GetFactList())
                 {
+                    // Check if current state has the fact name
                     if (!curState.HasFact(fact))
                     {
                         doable = false;
                         break;
                     }
+                    else
+                    {
+                        // If had, check if the value is true (the same)
+                        CFact f = curState.GetFact(fact.name);
+                        if (!f.isEqual(fact))
+                        {
+                            doable = false;
+                        }
+                    }
                 }
+
                 if (doable) 
                     doableAction.Add(act);
             }
 
             return doableAction;
         }
-
-        #endregion
 
         // This implementation is long and costly
         // If have time, improve it with State table and better search algorithm for better performance
@@ -100,12 +109,6 @@ namespace Unity.GOAP.Planner
             }
 
             Queue<CActionBase> re = new Queue<CActionBase>(actionQueue.Reverse());
-
-            //Debug.Log("Action queue found");
-            //foreach (CActionBase a in re)
-            //{
-            //    Debug.Log(a.actionName);
-            //}
 
             return re;
         }

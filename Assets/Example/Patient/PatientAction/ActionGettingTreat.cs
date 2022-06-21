@@ -34,6 +34,7 @@ public class ActionGettingTreat : CActionBase
     public override bool Pos_Perform(CAgent agent)
     {
         timer = timer + Time.deltaTime;
+        this.isActive = true;
         if (timer >= 5f)
         {
             Debug.Log("Complete performing: " + actionName);

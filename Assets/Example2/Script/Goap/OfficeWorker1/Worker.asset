@@ -1,0 +1,225 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7999216758249590595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c5b9104eb2ca4c4db0e5dc7331e8548, type: 3}
+  m_Name: PlayInThePark
+  m_EditorClassIdentifier: 
+  guid: 329ed36f21abd8940ba550917a753405
+  position: {x: -27.199945, y: 25.599998}
+  cost: 1
+  actionName: Play in the park
+  PreConditions:
+  - name: finishedWork
+    value: 1
+  - name: relaxingTime
+    value: 1
+  Effects:
+  - name: hadFun
+    value: 1
+  agentEffects: []
+  worldEffects: []
+  isActive: 0
+  isInteruptable: 0
+  forceReplan: 0
+  childiren:
+  - {fileID: -1943375197139207004}
+--- !u!114 &-4427121551940462265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96a10f72aefd1dc4eb2d58b9dd3bae51, type: 3}
+  m_Name: PlayAtWeekend
+  m_EditorClassIdentifier: 
+  guid: a68b9d7c95f6dec439c7767911affe97
+  position: {x: 169.60002, y: 144.79999}
+  important: 8
+  goalName: Play at the weekend
+  deletable: 0
+  goalList:
+  - name: hadMoreFun
+    value: 1
+--- !u!114 &-2091412587358062384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: def819f171c74f543b1dfd01410e0451, type: 3}
+  m_Name: GoToWork
+  m_EditorClassIdentifier: 
+  guid: b29031711923d0c42b638a0ae8ee102e
+  position: {x: -27.199951, y: -80.8}
+  cost: 1
+  actionName: Go to work
+  PreConditions:
+  - name: relaxingTime
+    value: 0
+  - name: workingDay
+    value: 1
+  Effects: []
+  agentEffects:
+  - name: finishedWork
+    value: 1
+  worldEffects: []
+  isActive: 1
+  isInteruptable: 0
+  forceReplan: 0
+  childiren:
+  - {fileID: 1618640306771370989}
+--- !u!114 &-2036810100005101337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f74b0a4a25da17e4e8909ab61d457725, type: 3}
+  m_Name: GoHomeAndRest
+  m_EditorClassIdentifier: 
+  guid: 722835055de302b489ea0ca8b74eb5df
+  position: {x: -27.199944, y: 252.79999}
+  cost: 1
+  actionName: Go home and sleep
+  PreConditions:
+  - name: relaxingTime
+    value: 1
+  Effects:
+  - name: rested
+    value: 1
+  agentEffects: []
+  worldEffects: []
+  isActive: 0
+  isInteruptable: 0
+  forceReplan: 0
+  childiren:
+  - {fileID: 979806855761282728}
+--- !u!114 &-1943375197139207004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f8198250e22e6c43ac355ac4414419a, type: 3}
+  m_Name: PlayAfterWork
+  m_EditorClassIdentifier: 
+  guid: 10c43d0ed2a5f44438d7b9cf33c04674
+  position: {x: 161.6, y: 25.599998}
+  important: 8
+  goalName: Play after work
+  deletable: 0
+  goalList:
+  - name: hadFun
+    value: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a0157dc1aad40f44a7fb65fe1fc86d3, type: 3}
+  m_Name: Worker
+  m_EditorClassIdentifier: 
+  rootNode: {fileID: 0}
+  actions:
+  - {fileID: -2036810100005101337}
+  - {fileID: -7999216758249590595}
+  - {fileID: -2091412587358062384}
+  - {fileID: 2283160213518985266}
+  goals:
+  - {fileID: -1943375197139207004}
+  - {fileID: -4427121551940462265}
+  - {fileID: 979806855761282728}
+  - {fileID: 1618640306771370989}
+--- !u!114 &979806855761282728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1a66339f5b4af646969900aea612796, type: 3}
+  m_Name: RestAtHome
+  m_EditorClassIdentifier: 
+  guid: 810d969659628aa4d95e7b89806acf9d
+  position: {x: 171.60802, y: 252.8}
+  important: 8
+  goalName: Sleep at home
+  deletable: 0
+  goalList:
+  - name: rested
+    value: 1
+--- !u!114 &1618640306771370989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d150745e6f3bf0145a7ecdba36e7062e, type: 3}
+  m_Name: Work
+  m_EditorClassIdentifier: 
+  guid: c2032741f0b01c348934f235c98a9419
+  position: {x: 161.20802, y: -80.80002}
+  important: 10
+  goalName: Work
+  deletable: 0
+  goalList:
+  - name: finishedWork
+    value: 1
+--- !u!114 &2283160213518985266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15d76cae162999842890a39b37e9f07e, type: 3}
+  m_Name: WeekendPlan
+  m_EditorClassIdentifier: 
+  guid: 08c131951e2e7e648a2b886494b2d6a3
+  position: {x: -23.199991, y: 144.79999}
+  cost: 1
+  actionName: Play at weekend
+  PreConditions:
+  - name: offDay
+    value: 1
+  Effects:
+  - name: hadMoreFun
+    value: 1
+  agentEffects: []
+  worldEffects: []
+  isActive: 0
+  isInteruptable: 0
+  forceReplan: 0
+  childiren:
+  - {fileID: -4427121551940462265}

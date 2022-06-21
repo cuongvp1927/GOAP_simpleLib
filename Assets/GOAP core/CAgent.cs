@@ -102,6 +102,7 @@ namespace Unity.GOAP.Agent
         {
             planner = new CPlanner();
             currentGoal = null;
+            currentAction = null;
             var sortedGoal = goalList.OrderByDescending(g => g.important);
 
             foreach (CGoal g in sortedGoal)
@@ -154,13 +155,13 @@ namespace Unity.GOAP.Agent
                 timer = 0;
             }
 
+
             // Check if currently running any action
             if ((currentAction != null) && (currentAction.isActive))
             {
                 // If sometime when running, player or user ask to stop the action. stop and re-plan
                 if ((interupt) && (currentAction.isInteruptable))
                 {
-                    currentAction = null;
                     GetAGoal();
                     return;
                 }
@@ -170,7 +171,18 @@ namespace Unity.GOAP.Agent
                 if (currentAction.HasFailed(this))
                 {
                     Debug.Log("Agent: " + agentName + " fail to perform performing: " + currentAction.actionName);
+                    foreach (CGoal g in goalList)
+                    {
+                        Debug.Log("Check GoalList before: " + g.goalName);
+                    }
+
                     goalList.Remove(currentGoal);
+
+                    foreach (CGoal g in goalList)
+                    {
+                        Debug.Log("Check GoalList after: " + g.goalName);
+                    }
+
                     BlackListingGoal(currentGoal);
                     GetAGoal();
                     return;
