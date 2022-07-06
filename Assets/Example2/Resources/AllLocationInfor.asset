@@ -30,4 +30,6 @@ MonoBehaviour:
   - codeName: Library
     obj: {fileID: 3267349236567645744, guid: 2248e47fd15913e439a49b4b0c5dbd07, type: 3}
   - codeName: Home1
-    obj: {fileID: 8585779280554916716, guid: 9a1fd96c12ff90b4f95d9c219d4a0f0f, type: 3}
+    obj: {fileID: 7407260604420580156, guid: 9a1fd96c12ff90b4f95d9c219d4a0f0f, type: 3}
+  - codeName: Home2
+    obj: {fileID: 74243171412637253, guid: 8cb3fa8f74e84d149ba45c32bbe2db3d, type: 3}

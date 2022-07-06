@@ -36,7 +36,8 @@ public class Clock : MonoBehaviour
     private int maxMin = 60;
 
     private float timer = 0;
-    private DAY day = DAY.Monday;
+    //private DAY day = DAY.Monday;
+    private DAY day = DAY.Saturday;
 
     private void Start()
     {
@@ -101,21 +102,76 @@ public class Clock : MonoBehaviour
         {
             CWorld.Instance.GetFacts().ChangeFact("workingDay", 1);
             CWorld.Instance.GetFacts().ChangeFact("offDay", 0);
-
-            if (hour >= 7 && hour <= 17)
-            {
-                CWorld.Instance.GetFacts().ChangeFact("relaxingTime", 0);
-            }
-            else
-            {
-                CWorld.Instance.GetFacts().ChangeFact("relaxingTime", 1);
-            }
         }
         else
         {
             CWorld.Instance.GetFacts().ChangeFact("offDay", 1);
             CWorld.Instance.GetFacts().ChangeFact("workingDay", 0);
-            CWorld.Instance.GetFacts().ChangeFact("relaxingTime", 1);
         }
+
+        if (hour >= 6 && hour < 11)
+        {
+            CWorld.Instance.GetFacts().ChangeFact("morningShift", 1);
+            CWorld.Instance.GetFacts().ChangeFact("afternoonShift", 0);
+            CWorld.Instance.GetFacts().ChangeFact("relaxingTime", 0);
+        }
+        else
+        {
+            if (hour >= 13 && hour <= 17)
+            {
+                CWorld.Instance.GetFacts().ChangeFact("morningShift", 0);
+                CWorld.Instance.GetFacts().ChangeFact("afternoonShift", 1);
+                CWorld.Instance.GetFacts().ChangeFact("relaxingTime", 0);
+            }
+            else
+            {
+                if (hour >= 20 || hour <= 4)
+                {
+                    CWorld.Instance.GetFacts().ChangeFact("nightShift", 1);
+                }
+                else
+                {
+                    CWorld.Instance.GetFacts().ChangeFact("NightShift", 0);
+                }
+                CWorld.Instance.GetFacts().ChangeFact("morningShift", 0);
+                CWorld.Instance.GetFacts().ChangeFact("afternoonShift", 0);
+                CWorld.Instance.GetFacts().ChangeFact("relaxingTime", 1);
+            }
+        }
+
+        if (hour > 22 || hour < 6)
+        {
+            CWorld.Instance.GetFacts().ChangeFact("sleepTime", 1);
+        }
+        else
+        {
+            CWorld.Instance.GetFacts().ChangeFact("sleepTime", 0);
+        }
+
+        if ((hour >= 11 && hour < 13) || (hour > 18 && hour < 19))
+        {
+            CWorld.Instance.GetFacts().ChangeFact("eatingTime", 1);
+        }
+        else
+        {
+
+            CWorld.Instance.GetFacts().ChangeFact("eatingTime", 0);
+        }
+    }
+    public int getTimeRatio()
+    {
+        return timeRatio;
+    }
+    public float getSecPerMin()
+    {
+        return secPerMin;
+    }
+    public int getMin()
+    {
+        return minutes;
+    }
+    public int getHour()
+    {
+        return hour;
     }
 }

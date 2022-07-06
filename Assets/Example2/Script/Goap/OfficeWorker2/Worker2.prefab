@@ -1406,6 +1406,7 @@ Transform:
   m_Children:
   - {fileID: 5140769221628386403}
   - {fileID: 7241426229722774402}
+  - {fileID: 1601928938667573737}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1425,143 +1426,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: '
-
-    Transform ''CH_Head'' has been deleted
-
-    Transform
-    ''CH_Neck'' has been deleted
-
-    Transform ''CH_FingerIn2_L'' has been deleted
-
-    Transform
-    ''CH_FingerIn1_L'' has been deleted
-
-    Transform ''CH_FingerIn0_L'' has been
-    deleted
-
-    Transform ''CH_FingerMid2_L'' has been deleted
-
-    Transform ''CH_FingerMid1_L''
-    has been deleted
-
-    Transform ''CH_FingerMid0_L'' has been deleted
-
-    Transform
-    ''CH_FingerP2_L'' has been deleted
-
-    Transform ''CH_FingerP1_L'' has been
-    deleted
-
-    Transform ''CH_FingerP0_L'' has been deleted
-
-    Transform ''CH_FingerR2_L''
-    has been deleted
-
-    Transform ''CH_FingerR1_L'' has been deleted
-
-    Transform
-    ''CH_FingerR0_L'' has been deleted
-
-    Transform ''CH_FingerTh2_L'' has been
-    deleted
-
-    Transform ''CH_FingerTh1_L'' has been deleted
-
-    Transform ''CH_FingerTh0_L''
-    has been deleted
-
-    Transform ''CH_Hand_L'' has been deleted
-
-    Transform
-    ''CH_For_L'' has been deleted
-
-    Transform ''CH_Uppe_L'' has been deleted
-
-    Transform
-    ''CH_Shou_L'' has been deleted
-
-    Transform ''CH_FingerIn2_R'' has been deleted
-
-    Transform
-    ''CH_FingerIn1_R'' has been deleted
-
-    Transform ''CH_FingerIn0_R'' has been
-    deleted
-
-    Transform ''CH_FingerMid2_R'' has been deleted
-
-    Transform ''CH_FingerMid1_R''
-    has been deleted
-
-    Transform ''CH_FingerMid0_R'' has been deleted
-
-    Transform
-    ''CH_FingerP2_R'' has been deleted
-
-    Transform ''CH_FingerP1_R'' has been
-    deleted
-
-    Transform ''CH_FingerP0_R'' has been deleted
-
-    Transform ''CH_FingerR2_R''
-    has been deleted
-
-    Transform ''CH_FingerR1_R'' has been deleted
-
-    Transform
-    ''CH_FingerR0_R'' has been deleted
-
-    Transform ''CH_FingerTh2_R'' has been
-    deleted
-
-    Transform ''CH_FingerTh1_R'' has been deleted
-
-    Transform ''CH_FingerTh0_R''
-    has been deleted
-
-    Transform ''CH_Hand_R'' has been deleted
-
-    Transform
-    ''CH_For_R'' has been deleted
-
-    Transform ''CH_Uppe_R'' has been deleted
-
-    Transform
-    ''CH_Shou_R'' has been deleted
-
-    Transform ''CH_UpperChest'' has been deleted
-
-    Transform
-    ''CH_Chest'' has been deleted
-
-    Transform ''CH_Spine'' has been deleted
-
-    Transform
-    ''CH_Toe_L'' has been deleted
-
-    Transform ''CH_Foot_L'' has been deleted
-
-    Transform
-    ''CH_Shin_L'' has been deleted
-
-    Transform ''CH_Thigh_L'' has been deleted
-
-    Transform
-    ''CH_Toe_R'' has been deleted
-
-    Transform ''CH_Foot_R'' has been deleted
-
-    Transform
-    ''CH_Shin_R'' has been deleted
-
-    Transform ''CH_Thigh_R'' has been deleted
-
-    Transform
-    ''CH_Hips'' has been deleted
-
-    Transform ''Character1_Reference'' has been
-    deleted'
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -2317,3 +2182,87 @@ Transform:
   m_Father: {fileID: 8840087068911009385}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &9193484396366582096
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1601928938667573737}
+  - component: {fileID: 3566036988881158289}
+  - component: {fileID: 2725170408869671190}
+  m_Layer: 0
+  m_Name: Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1601928938667573737
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9193484396366582096}
+  m_LocalRotation: {x: 0.030189572, y: 0, z: 0, w: 0.99954426}
+  m_LocalPosition: {x: 0, y: 1.73, z: -1.06}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8955967620725984396}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 3.46, y: 0, z: 0}
+--- !u!20 &3566036988881158289
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9193484396366582096}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!81 &2725170408869671190
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9193484396366582096}
+  m_Enabled: 1

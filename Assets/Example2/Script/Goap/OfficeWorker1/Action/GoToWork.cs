@@ -36,13 +36,13 @@ public class GoToWork : CActionBase
 
     public override bool Pos_Perform(CAgent agent)
     {
+        this.isActive = true;
         if (CWorld.Instance.GetFacts().GetFact("relaxingTime").value == 1)
         {
             Debug.Log("Complete performing: " + actionName);
             this.isActive = false;
         }
         return true;
-        //return base.Pos_Perform(agent);
     }
     public override bool HasCompleted(CAgent agent)
     {

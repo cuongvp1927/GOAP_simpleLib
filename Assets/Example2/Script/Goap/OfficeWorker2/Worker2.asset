@@ -1,5 +1,34 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9136105164097387467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e21fd679bda206e46ae46ee7f881a884, type: 3}
+  m_Name: Working
+  m_EditorClassIdentifier: 
+  guid: 05ddf137b34e194428d68ae7e8e9243a
+  position: {x: 184.80006, y: 84.799995}
+  cost: 1
+  actionName: Working
+  PreConditions:
+  - name: atWork
+    value: 1
+  Effects: []
+  agentEffects:
+  - name: finishedWorking
+    value: 1
+  worldEffects: []
+  isActive: 0
+  isInteruptable: 0
+  forceReplan: 0
+  childiren:
+  - {fileID: -5075182164401285017}
 --- !u!114 &-7173689471652270746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29,7 +58,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53901f0eec2d4654c955c0c5fab56ac1, type: 3}
+  m_Script: {fileID: 11500000, guid: e21fd679bda206e46ae46ee7f881a884, type: 3}
   m_Name: Working
   m_EditorClassIdentifier: 
   guid: 0b8d3105a8a38da41a8947e698fc3b4a
@@ -62,13 +91,43 @@ MonoBehaviour:
   m_Name: SimpleGoal
   m_EditorClassIdentifier: 
   guid: 5aad88562b258f44c928fc6d21c3401b
-  position: {x: 378.66083, y: 84.870964}
+  position: {x: 379.2, y: 84.799995}
   important: 20
   goalName: Working
   deletable: 0
   goalList:
   - name: finishedWorking
     value: 1
+--- !u!114 &-3810230115448108358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63bf773fa1a28704b8f82df2ee823bc4, type: 3}
+  m_Name: MoveToPlace
+  m_EditorClassIdentifier: 
+  guid: 99c655035b318724fb22a35c5b7f16df
+  position: {x: -3.199952, y: 84.799995}
+  cost: 1
+  actionName: GoToWork
+  PreConditions:
+  - name: relaxingTime
+    value: 0
+  Effects:
+  - name: atWork
+    value: 1
+  agentEffects: []
+  worldEffects: []
+  isActive: 0
+  isInteruptable: 0
+  forceReplan: 0
+  childiren:
+  - {fileID: -9136105164097387467}
+  location: 
 --- !u!114 &-3402468289753783243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,12 +200,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootNode: {fileID: 0}
   actions:
-  - {fileID: 8897677077665503475}
-  - {fileID: -5549450540580559249}
   - {fileID: 5540059702643825531}
   - {fileID: -3402468289753783243}
   - {fileID: 3717190584284179952}
   - {fileID: -519634888535418848}
+  - {fileID: -3810230115448108358}
+  - {fileID: -9136105164097387467}
   goals:
   - {fileID: -5075182164401285017}
   - {fileID: -7173689471652270746}
@@ -184,7 +243,7 @@ MonoBehaviour:
   m_Name: MoveToPlace
   m_EditorClassIdentifier: 
   guid: c95f8da2a9b015e4482d7bd3ba8cc5e3
-  position: {x: -3.1999738, y: 370.40002}
+  position: {x: -3.199952, y: 370.4}
   cost: 1
   actionName: GoToSchool
   PreConditions:
@@ -214,7 +273,7 @@ MonoBehaviour:
   m_Name: MoveToPlace
   m_EditorClassIdentifier: 
   guid: 5bbc2c99d1abd7a40945a8c6f76d00d6
-  position: {x: -3.2000034, y: 235.99988}
+  position: {x: -3.199952, y: 236.00003}
   cost: 1
   actionName: GoToThePark
   PreConditions:
@@ -225,39 +284,9 @@ MonoBehaviour:
     value: 1
   agentEffects: []
   worldEffects: []
-  isActive: 0
-  isInteruptable: 0
-  forceReplan: 0
-  childiren:
-  - {fileID: -3402468289753783243}
-  location: Park2
---- !u!114 &8897677077665503475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63bf773fa1a28704b8f82df2ee823bc4, type: 3}
-  m_Name: MoveToPlace
-  m_EditorClassIdentifier: 
-  guid: 5ebcb7ce678959d49bcf6b304ed21449
-  position: {x: -3.739162, y: 84.870964}
-  cost: 1
-  actionName: GoToWork
-  PreConditions:
-  - name: relaxingTime
-    value: 0
-  Effects:
-  - name: atWork
-    value: 1
-  agentEffects: []
-  worldEffects: []
   isActive: 1
   isInteruptable: 0
   forceReplan: 0
   childiren:
-  - {fileID: -5549450540580559249}
-  location: Restaurant
+  - {fileID: -3402468289753783243}
+  location: Home1
