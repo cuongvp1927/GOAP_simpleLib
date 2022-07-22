@@ -9,9 +9,7 @@ namespace Unity.GOAP.ActionBase {
     {
         public int cost = 1;
         public string actionName = "New Action";
-        //public float duration = 0.5f;
-        //public float preActionDuration = 0.5f;
-        //public float posActionDuration = 0.5f;
+        public bool isInteruptable = true;
 
         public List<CFact> PreConditions;
 
@@ -24,14 +22,16 @@ namespace Unity.GOAP.ActionBase {
         // The effect to the world state, does not affect the agent's state
         public List<CFact> worldEffects;
 
-        [HideInInspector] protected CAgent agent;
-
         [HideInInspector] public bool isActive = false;
-        [HideInInspector] public bool isInteruptable = false;
         [HideInInspector] public bool forceReplan = false;
 
         [HideInInspector] public CFactManager preconditions;
         [HideInInspector] public CFactManager effects;
+
+        public CActionBase() : base()
+        {
+            this.actionName = this.GetType().Name;
+        }
 
         public virtual void Initiate()
         {
@@ -83,6 +83,12 @@ namespace Unity.GOAP.ActionBase {
         {
             Debug.Log("Complete performing: " + actionName);
             return true;
+        }
+
+        public virtual void OnFail(CAgent agent)
+        {
+            Debug.Log("Agent: " + agent.agentName + " fail to perform performing: " + this.actionName);
+            return;
         }
 
         [HideInInspector]public List<Node> childiren = new List<Node>();

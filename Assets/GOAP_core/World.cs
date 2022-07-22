@@ -125,7 +125,7 @@ namespace Unity.GOAP.World
         }
     }
 
-    public sealed class CWorld
+    public sealed class CWorld : MonoBehaviour
     {
         private static readonly CWorld instance = new CWorld();
         private static CFactManager factManager;

@@ -36,8 +36,8 @@ public class Clock : MonoBehaviour
     private int maxMin = 60;
 
     private float timer = 0;
-    //private DAY day = DAY.Monday;
-    private DAY day = DAY.Saturday;
+    private DAY day = DAY.Monday;
+    //private DAY day = DAY.Saturday;
 
     private void Start()
     {
@@ -165,6 +165,10 @@ public class Clock : MonoBehaviour
     public float getSecPerMin()
     {
         return secPerMin;
+    }
+    public float getTime()
+    {
+        return timer;
     }
     public int getMin()
     {

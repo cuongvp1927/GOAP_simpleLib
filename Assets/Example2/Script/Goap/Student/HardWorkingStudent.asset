@@ -20,6 +20,37 @@ MonoBehaviour:
   goalList:
   - name: slept
     value: 1
+--- !u!114 &-4767905440442828365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b625824361af434bbce399211b0e739, type: 3}
+  m_Name: StudyingAtHome
+  m_EditorClassIdentifier: 
+  guid: 36d88ec5beda556428da3719d6cafd2d
+  position: {x: -95.199974, y: 295.2882}
+  cost: 2
+  actionName: StudyingAtHome
+  PreConditions:
+  - name: offDay
+    value: 1
+  Effects:
+  - name: extraStudied
+    value: 1
+  agentEffects:
+  - name: atLocHome
+    value: 1
+  worldEffects: []
+  isActive: 0
+  isInteruptable: 0
+  forceReplan: 0
+  childiren: []
+  studyTime: 10
 --- !u!114 &-4147719821555647158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,7 +186,7 @@ MonoBehaviour:
   m_Name: StudyingAtHome
   m_EditorClassIdentifier: 
   guid: 421607f5f38dd1447998634caa6b00a6
-  position: {x: -100.00006, y: 178.40001}
+  position: {x: -99.99998, y: 178.39995}
   cost: 1
   actionName: StudyingAtHome
   PreConditions:
@@ -193,6 +224,8 @@ MonoBehaviour:
   PreConditions:
   - name: afternoonShift
     value: 1
+  - name: workingDay
+    value: 1
   Effects:
   - name: afternoonStudied
     value: 1
@@ -229,6 +262,8 @@ MonoBehaviour:
   - {fileID: 9053871189600256546}
   - {fileID: 2372206964223705760}
   - {fileID: -1980758154125048217}
+  - {fileID: 5284144963358799542}
+  - {fileID: -4767905440442828365}
   goals:
   - {fileID: 7492305108529277745}
   - {fileID: -3291495718921599604}
@@ -236,6 +271,7 @@ MonoBehaviour:
   - {fileID: -2673863419131366481}
   - {fileID: -4147719821555647158}
   - {fileID: 5421060250958577918}
+  - {fileID: 9136980323914687670}
 --- !u!114 &2372206964223705760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,6 +332,40 @@ MonoBehaviour:
   childiren:
   - {fileID: 7814307997622131720}
   location: Home1
+--- !u!114 &5284144963358799542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 792df13702d9a324ab4bd0c831472cc0, type: 3}
+  m_Name: StudyingAtSchool
+  m_EditorClassIdentifier: 
+  guid: 97c61596af1a118429b95a5d3d642a59
+  position: {x: -99.99997, y: 432.2734}
+  cost: 1
+  actionName: StudyingAtSchool
+  PreConditions:
+  - name: offDay
+    value: 1
+  - name: morningShift
+    value: 1
+  Effects:
+  - name: weekendStudy
+    value: 1
+  agentEffects:
+  - name: atLocSchool
+    value: 1
+  worldEffects: []
+  isActive: 0
+  isInteruptable: 0
+  forceReplan: 0
+  childiren:
+  - {fileID: 9136980323914687670}
+  isMorningShift: 1
 --- !u!114 &5421060250958577918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,7 +379,7 @@ MonoBehaviour:
   m_Name: StudyingExtraClass
   m_EditorClassIdentifier: 
   guid: f98366a61094c3b41a12aef74471e933
-  position: {x: 137.59995, y: 178.50578}
+  position: {x: 133.59998, y: 178.39993}
   important: 51
   goalName: StudyingExtraClass
   deletable: 0
@@ -329,11 +399,13 @@ MonoBehaviour:
   m_Name: StudyingAtSchool
   m_EditorClassIdentifier: 
   guid: 50243ad680f2563468366e3c82326331
-  position: {x: -100.000046, y: 41.6}
+  position: {x: -99.99998, y: 41.60003}
   cost: 1
   actionName: StudyingAtSchool
   PreConditions:
   - name: morningShift
+    value: 1
+  - name: workingDay
     value: 1
   Effects:
   - name: morningStudied
@@ -430,3 +502,23 @@ MonoBehaviour:
   forceReplan: 0
   childiren:
   - {fileID: -4147719821555647158}
+--- !u!114 &9136980323914687670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b39317445bd1486488c39e1bb3284026, type: 3}
+  m_Name: StudyWeekend
+  m_EditorClassIdentifier: 
+  guid: 8943de52d344d434091ab1a2ca7185bc
+  position: {x: 137.60002, y: 432.2734}
+  important: 75
+  goalName: StudyWeekend
+  deletable: 0
+  goalList:
+  - name: weekendStudy
+    value: 1

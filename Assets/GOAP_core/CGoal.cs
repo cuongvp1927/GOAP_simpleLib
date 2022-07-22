@@ -17,6 +17,11 @@ namespace Unity.GOAP.Goal
 
         public CFactManager goals;
 
+        public CGoal() : base()
+        {
+            this.goalName = this.GetType().Name;
+        }
+        
         public virtual void Initiate()
         {
             goals = new CFactManager(goalList);

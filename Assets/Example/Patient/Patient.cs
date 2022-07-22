@@ -23,11 +23,6 @@ public class Patient : CAgent
 
     }
 
-    protected override void FixedUpdate()
-    {
-        base.FixedUpdate();
-    }
-
     public void Move()
     {
         navAgent.SetDestination(this.position3D);

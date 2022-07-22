@@ -34,7 +34,7 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
         }
         else if (node is CGoal)
         {
-            input = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
+            input = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Multi, typeof(bool));
         }
 
         if (input != null)

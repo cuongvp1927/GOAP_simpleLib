@@ -141,7 +141,7 @@ namespace Unity.GOAP.Planner
                 // If the goal is complete by this action, this action is a leaf, and a plan is found
                 if (goal.IsSatified(states))
                 {
-                    leaves.Add(child);
+                    leaves.Add(child);      
                     foundpath = true;
                 }
                 // Else, remove this action from the action list, and move on to the next loop
@@ -153,6 +153,7 @@ namespace Unity.GOAP.Planner
                     if (found)
                     {
                         foundpath = found;
+                        //break;
                     }
                 }
             }

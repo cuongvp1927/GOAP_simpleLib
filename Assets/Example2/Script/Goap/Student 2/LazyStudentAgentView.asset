@@ -1,5 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7464975260814451528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ce45e1786b7fc543b7704f7680df1dc, type: 3}
+  m_Name: Playing
+  m_EditorClassIdentifier: 
+  guid: 52d4f348892081648a0e000f1077d009
+  position: {x: -92.399864, y: 375.2}
+  cost: 1
+  actionName: Playing
+  PreConditions:
+  - name: atLocPark
+    value: 1
+  - name: offDay
+    value: 1
+  Effects:
+  - name: weekendFun
+    value: 1
+  agentEffects: []
+  worldEffects: []
+  isActive: 0
+  isInteruptable: 0
+  forceReplan: 0
+  childiren:
+  - {fileID: 8738290871738363835}
+  playTime: 10
 --- !u!114 &-5353154322710600127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40,6 +72,34 @@ MonoBehaviour:
   goalList:
   - name: ate
     value: 1
+--- !u!114 &-3702176417076510389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63bf773fa1a28704b8f82df2ee823bc4, type: 3}
+  m_Name: MoveToPlace
+  m_EditorClassIdentifier: 
+  guid: 539ab9b6ef4225c41b147d075dbb5697
+  position: {x: -293.59995, y: 375.19998}
+  cost: 1
+  actionName: MoveToPlace
+  PreConditions: []
+  Effects: []
+  agentEffects:
+  - name: atLocPark
+    value: 1
+  worldEffects: []
+  isActive: 1
+  isInteruptable: 0
+  forceReplan: 0
+  childiren:
+  - {fileID: -7464975260814451528}
+  location: Park2
 --- !u!114 &-3291495718921599604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,6 +241,8 @@ MonoBehaviour:
   PreConditions:
   - name: afternoonShift
     value: 1
+  - name: workingDay
+    value: 1
   Effects:
   - name: afternoonStudied
     value: 1
@@ -212,6 +274,8 @@ MonoBehaviour:
   actionName: StudyingAtSchool
   PreConditions:
   - name: relaxingTime
+    value: 1
+  - name: workingDay
     value: 1
   Effects:
   - name: studyExtraClass
@@ -251,6 +315,8 @@ MonoBehaviour:
   - {fileID: 1846290272478879695}
   - {fileID: 237113196808896220}
   - {fileID: -412479563751433954}
+  - {fileID: -3702176417076510389}
+  - {fileID: -7464975260814451528}
   goals:
   - {fileID: 7492305108529277745}
   - {fileID: -3291495718921599604}
@@ -259,6 +325,7 @@ MonoBehaviour:
   - {fileID: -4147719821555647158}
   - {fileID: -2215849721037267098}
   - {fileID: 6142111506779321641}
+  - {fileID: 8738290871738363835}
 --- !u!114 &237113196808896220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,6 +346,8 @@ MonoBehaviour:
   - name: atLocPark1
     value: 1
   - name: afternoonShift
+    value: 1
+  - name: workingDay
     value: 1
   Effects:
   - name: skipSchoolAndHadFun
@@ -394,7 +463,7 @@ MonoBehaviour:
   m_Name: StudyingExtraClass
   m_EditorClassIdentifier: 
   guid: 677d87c8caed1e145a5e1c45b7057578
-  position: {x: 48.80002, y: 242.4001}
+  position: {x: 48.79997, y: 242.39998}
   important: 50
   goalName: StudyingExtraClass
   deletable: 0
@@ -419,6 +488,8 @@ MonoBehaviour:
   actionName: StudyingAtSchool
   PreConditions:
   - name: morningShift
+    value: 1
+  - name: workingDay
     value: 1
   Effects:
   - name: morningStudied
@@ -484,6 +555,26 @@ MonoBehaviour:
   forceReplan: 0
   childiren:
   - {fileID: -5353154322710600127}
+--- !u!114 &8738290871738363835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f49c26204e70094187d55f87a23f175, type: 3}
+  m_Name: PlayAtWend
+  m_EditorClassIdentifier: 
+  guid: bc4d4955e81fdd24a82df47616ec425e
+  position: {x: 48.800148, y: 375.19998}
+  important: 50
+  goalName: PlayAtWend
+  deletable: 0
+  goalList:
+  - name: weekendFun
+    value: 1
 --- !u!114 &9053871189600256546
 MonoBehaviour:
   m_ObjectHideFlags: 0

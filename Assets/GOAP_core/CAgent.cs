@@ -24,7 +24,6 @@ namespace Unity.GOAP.Agent
 
         [HideInInspector] public Vector3 position3D;
 
-        protected List<CActionBase> possibleAction;
         protected Queue<CActionBase> actionQueue;
         protected CActionBase currentAction;
         protected CGoal currentGoal;
@@ -33,7 +32,10 @@ namespace Unity.GOAP.Agent
 
         protected CPlanner planner;
 
-        bool interupt = false;
+        public CAgent() : base()
+        {
+            this.agentName = this.GetType().Name;
+        }
 
         protected virtual void Awake()
         {
@@ -102,10 +104,16 @@ namespace Unity.GOAP.Agent
             }
         }
 
-        protected virtual void AskForInterupt()
+        protected void InterruptCurrentAction()
         {
-            throw new System.NotImplementedException();
+            if (currentAction.isInteruptable)
+            {
+                this.currentAction = null;
+                this.currentGoal = null;
+                this.GetAGoal();
+            }
         }
+
 
         // Called after t time to reset blacklist back to goal list
         protected void ResetBlackList()
@@ -165,7 +173,7 @@ namespace Unity.GOAP.Agent
             // the goal and re-plan.
             else
             {
-                Debug.Log("Agent: " + agentName + " can not perform action: " + currentAction.actionName);
+                currentAction.OnFail(this);
                 goalList.Remove(currentGoal);
                 BlackListingGoal(currentGoal);
                 GetAGoal();
@@ -174,7 +182,7 @@ namespace Unity.GOAP.Agent
         }
 
         float goalResetTimer = 0f;
-        protected virtual void FixedUpdate()
+        protected virtual void LateUpdate()
         {
             // After every x sec, reset the blacklist, this can be changed to different counter methods
             goalResetTimer = goalResetTimer += Time.deltaTime;
@@ -188,18 +196,12 @@ namespace Unity.GOAP.Agent
             // Check if currently running any action
             if ((currentAction != null) && (currentAction.isActive))
             {
-                // If sometime when running, player or user ask to stop the action. stop and re-plan
-                if ((interupt) && (currentAction.isInteruptable))
-                {
-                    GetAGoal();
-                    return;
-                }
-
                 // If durring perfoming action, things happen that cause the action to fail, temporary remove 
                 // the goal and re-plan.
                 if (currentAction.HasFailed(this))
                 {
-                    Debug.Log("Agent: " + agentName + " fail to perform performing: " + currentAction.actionName);
+                    currentAction.OnFail(this);
+
                     foreach (CGoal g in goalList)
                     {
                         Debug.Log("Check GoalList before: " + g.goalName);
