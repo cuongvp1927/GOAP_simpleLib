@@ -3,11 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Unity.GOAP.Goal;
+using Unity.GOAP.Agent;
+
 public class WorkNightShift : CGoal
 {
-    public WorkNightShift() : base()
+    IAgentExp2 worker;
+    public override void Initiate(CAgent a)
     {
-        this.goalName = "WorkNightShift";
+        base.Initiate(a);
+        worker = (IAgentExp2)a;
+    }
+
+    public override void OnComplete()
+    {
+        base.OnComplete();
+        worker.EarnMoney(50);
     }
 }
 

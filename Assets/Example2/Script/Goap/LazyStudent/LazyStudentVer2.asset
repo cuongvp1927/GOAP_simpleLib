@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StudyingAtSchoool
   m_EditorClassIdentifier: 
   guid: f1d4055ad7bfba148aa490c50e1f81e9
-  position: {x: 328.80002, y: 313.6}
+  position: {x: 327.19998, y: 313.6}
   cost: 1
   actionName: StudyingAtSchool(Morning)
   isInteruptable: 1
@@ -44,13 +44,13 @@ MonoBehaviour:
   m_Name: Ate
   m_EditorClassIdentifier: 
   guid: 0f5b9ac240a7c90418bb4aff791c5ecf
-  position: {x: 603.99994, y: 603.3668}
+  position: {x: 600.80005, y: 705.59924}
   important: 0
   goalName: Ate
   deletable: 0
   goalList:
   - name: ate
-    value: 0
+    value: 1
 --- !u!114 &-4968618911159421807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,7 +64,7 @@ MonoBehaviour:
   m_Name: StudyingAtSchoool
   m_EditorClassIdentifier: 
   guid: 3e40ec588129122479dc94008e44078a
-  position: {x: 328.80002, y: 430.64325}
+  position: {x: 325.60004, y: 448.99704}
   cost: 1
   actionName: StudyingAtSchoool(Afternoon)
   isInteruptable: 1
@@ -80,7 +80,8 @@ MonoBehaviour:
   worldEffects: []
   isActive: 0
   forceReplan: 0
-  childiren: []
+  childiren:
+  - {fileID: 9096832949127414236}
 --- !u!114 &-2870786317459373500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,7 +95,7 @@ MonoBehaviour:
   m_Name: EatingAtRestaurant
   m_EditorClassIdentifier: 
   guid: 0494dd610c0f25e4bb173059b2ac85c3
-  position: {x: 327.19998, y: 603.2}
+  position: {x: 324.00006, y: 705.59924}
   cost: 1
   actionName: EatingAtRestaurant
   isInteruptable: 1
@@ -110,6 +111,7 @@ MonoBehaviour:
   forceReplan: 0
   childiren:
   - {fileID: -5768311197706348673}
+  eatTime: 2
 --- !u!114 &-2544410284204297275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,30 +135,10 @@ MonoBehaviour:
   - name: atLocPark
     value: 1
   worldEffects: []
-  isActive: 1
+  isActive: 0
   forceReplan: 0
   childiren:
   - {fileID: 7489646450277219451}
---- !u!114 &-2466824431594446790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fb73d14052badc44a495f9e632b4738, type: 3}
-  m_Name: Played
-  m_EditorClassIdentifier: 
-  guid: ab0124ed86bdf434f894216c25b28301
-  position: {x: 592.8, y: 116.80002}
-  important: 0
-  goalName: Played
-  deletable: 0
-  goalList:
-  - name: hadFun
-    value: 1
 --- !u!114 &-374122159448941897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,7 +152,7 @@ MonoBehaviour:
   m_Name: GoToSchool
   m_EditorClassIdentifier: 
   guid: 0f9a557d8fbebe740b2c44bbc3ca915d
-  position: {x: 99.19999, y: 313.60004}
+  position: {x: 96, y: 448.80008}
   cost: 1
   actionName: GoToSchool
   isInteruptable: 1
@@ -180,11 +162,12 @@ MonoBehaviour:
   - name: atLocSchool
     value: 1
   worldEffects: []
-  isActive: 0
+  isActive: 1
   forceReplan: 0
   childiren:
   - {fileID: -6894630445537547916}
   - {fileID: -4968618911159421807}
+  - {fileID: 6003357423495846507}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,11 +191,12 @@ MonoBehaviour:
   - {fileID: 8876165883987901293}
   - {fileID: -2870786317459373500}
   - {fileID: -4968618911159421807}
+  - {fileID: 6003357423495846507}
   goals:
   - {fileID: -5768311197706348673}
   - {fileID: 5980409526337581102}
-  - {fileID: -2466824431594446790}
   - {fileID: 9096832949127414236}
+  - {fileID: 8915831630083694471}
 --- !u!114 &2428324248045504704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,6 +275,37 @@ MonoBehaviour:
   goalList:
   - name: Slept
     value: 1
+--- !u!114 &6003357423495846507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1d60be2c5b25784bbc7280c54b08be4, type: 3}
+  m_Name: StudyingAtSchoool
+  m_EditorClassIdentifier: 
+  guid: f810d9e575267d84a940a216a6f3d4d3
+  position: {x: 328.8, y: 569.26556}
+  cost: 1
+  actionName: StudyingAtSchoool(Extra)
+  isInteruptable: 1
+  PreConditions:
+  - name: atLocSchool
+    value: 1
+  - name: requiredExtraStudied
+    value: 1
+  Effects:
+  - name: studied
+    value: 1
+  agentEffects: []
+  worldEffects: []
+  isActive: 0
+  forceReplan: 0
+  childiren:
+  - {fileID: 9096832949127414236}
 --- !u!114 &7489646450277219451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,17 +326,15 @@ MonoBehaviour:
   PreConditions:
   - name: atLocPark
     value: 1
-  - name: FreeTime
-    value: 1
   Effects:
   - name: hadFun
     value: 1
   agentEffects: []
   worldEffects: []
-  isActive: 1
+  isActive: 0
   forceReplan: 0
-  childiren:
-  - {fileID: -2466824431594446790}
+  childiren: []
+  playTime: 3
 --- !u!114 &8876165883987901293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,7 +348,7 @@ MonoBehaviour:
   m_Name: GoToRestaurant
   m_EditorClassIdentifier: 
   guid: 63b78d4342f299c4e94b124b39691dd9
-  position: {x: 99.20004, y: 603.19995}
+  position: {x: 96.00006, y: 705.59924}
   cost: 1
   actionName: GoToRestaurant
   isInteruptable: 1
@@ -349,6 +362,26 @@ MonoBehaviour:
   forceReplan: 0
   childiren:
   - {fileID: -2870786317459373500}
+--- !u!114 &8915831630083694471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fb73d14052badc44a495f9e632b4738, type: 3}
+  m_Name: Played
+  m_EditorClassIdentifier: 
+  guid: 0cf275923a222a64191c34ccca55b0cc
+  position: {x: 592.8, y: 116.800026}
+  important: 0
+  goalName: Played
+  deletable: 1
+  goalList:
+  - name: hadFun
+    value: 1
 --- !u!114 &9096832949127414236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,7 +395,7 @@ MonoBehaviour:
   m_Name: Studied
   m_EditorClassIdentifier: 
   guid: 2ff44446c7aaaa44291f0dfb451fd679
-  position: {x: 604, y: 313.60004}
+  position: {x: 600.7999, y: 448.79987}
   important: 50
   goalName: Studied
   deletable: 0

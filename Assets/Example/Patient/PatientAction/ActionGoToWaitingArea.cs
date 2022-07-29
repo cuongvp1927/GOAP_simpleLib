@@ -10,7 +10,7 @@ public class ActionGoToWaitingArea : CActionBase
 {
     // Start is called before the first frame update
 
-    public override bool Pre_Perform(CAgent agent)
+    public override bool Pre_Perform()
     {
         GameObject target;
         target = GameObject.FindWithTag("WaitingArea");
@@ -23,7 +23,7 @@ public class ActionGoToWaitingArea : CActionBase
         return true;
     }
 
-    public override bool PerformAction(CAgent agent)
+    public override bool PerformAction()
     {
         Patient patient = (Patient)agent;
         patient.navAgent.SetDestination(agent.position3D);
@@ -32,7 +32,7 @@ public class ActionGoToWaitingArea : CActionBase
         return true;
     }
 
-    public override bool Pos_Perform(CAgent agent)
+    public override bool Pos_Perform()
     {
         ResourceManager.Instance.AddPatient(agent);
 
@@ -40,7 +40,7 @@ public class ActionGoToWaitingArea : CActionBase
         return true;
     }
 
-    public override bool HasCompleted(CAgent agent)
+    public override bool HasCompleted()
     {
         Patient patient = (Patient)agent;
         if (patient.navAgent.remainingDistance < 2f)
@@ -48,10 +48,10 @@ public class ActionGoToWaitingArea : CActionBase
         return false;
     }
 
-    public override bool HasFailed(CAgent agent)
+    public override bool HasFailed()
     {
         Patient patient = (Patient)agent;
-        if (HasCompleted(agent))
+        if (HasCompleted())
         {
             return false;
         }

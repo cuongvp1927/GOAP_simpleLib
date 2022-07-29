@@ -12,22 +12,22 @@ public class WorkingExtra : CActionBase
     {
         this.actionName = "WorkingExtra";
     }
-    public override bool Pre_Perform(CAgent agent)
+    public override bool Pre_Perform()
     {
-        return base.Pre_Perform(agent);
+        return base.Pre_Perform();
     }
 
-    public override bool PerformAction(CAgent agent)
+    public override bool PerformAction()
     {
-        return base.PerformAction(agent);
+        return base.PerformAction();
     }
 
-    public override bool Pos_Perform(CAgent agent)
+    public override bool Pos_Perform()
     {
         agent.agentFact.ChangeFact("needMoney", 0);
-        return base.Pos_Perform(agent);
+        return base.Pos_Perform();
     }
-    public override bool HasCompleted(CAgent agent)
+    public override bool HasCompleted()
     {
         timer += Time.deltaTime;
         if (timer >= workTime)
@@ -37,7 +37,7 @@ public class WorkingExtra : CActionBase
         return false;
     }
 
-    public override bool HasFailed(CAgent agent)
+    public override bool HasFailed()
     {
         return false;
     }

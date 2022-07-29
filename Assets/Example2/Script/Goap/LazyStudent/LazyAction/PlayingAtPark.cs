@@ -9,33 +9,45 @@ public class PlayingAtPark : CActionBase
 {
     float timer = 0;
     [SerializeField] float playTime = 5f;
-    public override bool Pre_Perform(CAgent agent)
+    LazyStudentSecVer student;
+
+    public override void Initiate(CAgent a)
+    {
+        base.Initiate(a);
+        student = (LazyStudentSecVer)agent;
+    }
+    public override bool Pre_Perform()
     {
         timer = 0;
+        if (student.agentFact.GetFact("FreeTime").value != 1)
+        {
+            student.IncreaseSkipCounter();
+        }
+
         return true;
     }
 
-    public override bool PerformAction(CAgent agent)
+    public override bool PerformAction()
     {
         isActive = true;
         return true;
     }
 
-    public override bool Pos_Perform(CAgent agent)
+    public override bool Pos_Perform()
     {
-        return base.Pos_Perform(agent);
+        return base.Pos_Perform();
     }
-    public override bool HasCompleted(CAgent agent)
+    public override bool HasCompleted()
     {
         timer += Time.deltaTime;
-        if (timer < playTime)
+        if (timer >= playTime)
         {
             return true;
         }
         return false;
     }
 
-    public override bool HasFailed(CAgent agent)
+    public override bool HasFailed()
     {
         return false;
     }

@@ -28,12 +28,14 @@ namespace Unity.GOAP.ActionBase {
         [HideInInspector] public CFactManager preconditions;
         [HideInInspector] public CFactManager effects;
 
+        protected CAgent agent;
+
         public CActionBase() : base()
         {
             this.actionName = this.GetType().Name;
         }
 
-        public virtual void Initiate()
+        public virtual void Initiate(CAgent a)
         {
             preconditions = new CFactManager();
             effects = new CFactManager();
@@ -55,37 +57,39 @@ namespace Unity.GOAP.ActionBase {
             {
                 effects.AddFact(f2.name, f2.value);
             }
+
+            this.agent = a;
         }
 
         // Check complete, required
-        public virtual bool HasCompleted(CAgent agent)
+        public virtual bool HasCompleted()
         {
             return true;
         }
         // Check if failed, required
-        public virtual bool HasFailed(CAgent agent)
+        public virtual bool HasFailed()
         {
             return false;
         }
 
         // Main action, required
-        public virtual bool PerformAction(CAgent agent)
+        public virtual bool PerformAction()
         {
             return false;
         }
         // Pre calculation if needed, return true to start performing the action.
-        public virtual bool Pre_Perform(CAgent agent)
+        public virtual bool Pre_Perform()
         {
             return true;
         }
         // Pos calculation if needed.
-        public virtual bool Pos_Perform(CAgent agent)
+        public virtual bool Pos_Perform()
         {
             Debug.Log("Complete performing: " + actionName);
             return true;
         }
 
-        public virtual void OnFail(CAgent agent)
+        public virtual void OnFail()
         {
             Debug.Log("Agent: " + agent.agentName + " fail to perform performing: " + this.actionName);
             return;

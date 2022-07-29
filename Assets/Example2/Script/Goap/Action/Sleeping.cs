@@ -11,22 +11,22 @@ public class Sleeping : CActionBase
     {
         this.actionName = "Sleeping";
     }
-    public override bool Pre_Perform(CAgent agent)
+    public override bool Pre_Perform()
     {
-        return base.Pre_Perform(agent);
+        return base.Pre_Perform();
     }
 
-    public override bool PerformAction(CAgent agent)
+    public override bool PerformAction()
     {
-        return base.PerformAction(agent);
+        return base.PerformAction();
     }
 
-    public override bool Pos_Perform(CAgent agent)
+    public override bool Pos_Perform()
     {
         agent.agentFact.ClearFacts();
-        return base.Pos_Perform(agent);
+        return base.Pos_Perform();
     }
-    public override bool HasCompleted(CAgent agent)
+    public override bool HasCompleted()
     {
         if (CWorld.Instance.GetFacts().GetFact("sleepTime").value ==0)
         {
@@ -35,7 +35,7 @@ public class Sleeping : CActionBase
         return false;
     }
 
-    public override bool HasFailed(CAgent agent)
+    public override bool HasFailed()
     {
         return false;
     }

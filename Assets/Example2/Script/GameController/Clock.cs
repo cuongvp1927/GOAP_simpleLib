@@ -32,8 +32,8 @@ public class Clock : MonoBehaviour
     private int hour;
     private int minutes;
 
-    private int maxHr = 24;
-    private int maxMin = 60;
+    private readonly int maxHr = 24;
+    private readonly int maxMin = 60;
 
     private float timer = 0;
     private DAY day = DAY.Monday;
@@ -131,7 +131,7 @@ public class Clock : MonoBehaviour
                 }
                 else
                 {
-                    CWorld.Instance.GetFacts().ChangeFact("NightShift", 0);
+                    CWorld.Instance.GetFacts().ChangeFact("nightShift", 0);
                 }
                 CWorld.Instance.GetFacts().ChangeFact("morningShift", 0);
                 CWorld.Instance.GetFacts().ChangeFact("afternoonShift", 0);
@@ -158,23 +158,23 @@ public class Clock : MonoBehaviour
             CWorld.Instance.GetFacts().ChangeFact("eatingTime", 0);
         }
     }
-    public int getTimeRatio()
+    public int EatTimeRatio()
     {
         return timeRatio;
     }
-    public float getSecPerMin()
+    public float GetSecPerMin()
     {
         return secPerMin;
     }
-    public float getTime()
+    public float GetTime()
     {
         return timer;
     }
-    public int getMin()
+    public int GetMin()
     {
         return minutes;
     }
-    public int getHour()
+    public int GetHour()
     {
         return hour;
     }

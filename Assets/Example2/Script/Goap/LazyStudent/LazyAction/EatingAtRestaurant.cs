@@ -8,34 +8,34 @@ using Unity.GOAP.ActionBase;
 public class EatingAtRestaurant : CActionBase
 {
     float timer = 0f;
-    [SerializeField] float eatTime = 1f;
-    public override bool Pre_Perform(CAgent agent)
+    [SerializeField] float eatTime = 2f;
+    public override bool Pre_Perform()
     {
-
+        timer = 0;
         return true;
     }
 
-    public override bool PerformAction(CAgent agent)
+    public override bool PerformAction()
     {
         isActive = true;
         return true;
     }
 
-    public override bool Pos_Perform(CAgent agent)
+    public override bool Pos_Perform()
     {
-        return base.Pos_Perform(agent);
+        return base.Pos_Perform();
     }
-    public override bool HasCompleted(CAgent agent)
+    public override bool HasCompleted()
     {
         timer += Time.deltaTime;
-        if (agent.agentFact.GetFact("EatTime").value !=1 || timer < eatTime)
+        if (agent.agentFact.GetFact("EatTime").value !=1 || timer >= eatTime)
         {
             return true;
         }
         return false;
     }
 
-    public override bool HasFailed(CAgent agent)
+    public override bool HasFailed()
     {
         return false;
     }

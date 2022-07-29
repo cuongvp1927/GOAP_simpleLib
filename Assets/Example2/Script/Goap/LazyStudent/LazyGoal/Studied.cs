@@ -7,9 +7,9 @@ using Unity.GOAP.Agent;
 
 public class Studied : CGoal
 {
-    public override void OnStart(CAgent agent)
+    public override void OnStart()
     {
-        base.OnStart(agent);
+        base.OnStart();
         Debug.Log(this.important);
     }
 }

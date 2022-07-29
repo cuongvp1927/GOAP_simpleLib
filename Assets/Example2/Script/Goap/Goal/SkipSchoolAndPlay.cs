@@ -13,7 +13,7 @@ public class SkipSchoolAndPlay : CGoal
         this.goalName = "SkipSchoolAndPlay";
     }
 
-    public override void OnComplete(CAgent agent)
+    public override void OnComplete()
     {
         agent.UpdateGoalImportant("StudyingAfternoon", 76);
         agent.UpdateGoalImportant(this.goalName, 50);
@@ -23,7 +23,7 @@ public class SkipSchoolAndPlay : CGoal
             agent.UpdateGoalImportant("StudyingExtraClass", 77);
             count = 0;
         }
-        base.OnComplete(agent);
+        base.OnComplete();
     }
 }
 

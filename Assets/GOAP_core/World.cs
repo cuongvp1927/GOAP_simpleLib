@@ -9,9 +9,9 @@ namespace Unity.GOAP.World
     public class CFact
     {
         public string name;
-        public int value;
+        public float value;
 
-        public CFact(string name, int value)
+        public CFact(string name, float value)
         {
             this.name = name;
             this.value = value;
@@ -53,7 +53,7 @@ namespace Unity.GOAP.World
             return facts.Find(fa => fa.name == name); 
         }
 
-        public void ChangeFact(string name, int value)
+        public void ChangeFact(string name, float value)
         {
             CFact fact = GetFact(name);
             if (fact != null)
@@ -65,7 +65,7 @@ namespace Unity.GOAP.World
                 facts.Add(new CFact(name, value));
             }
         }
-        public void AddFact(string name, int value)
+        public void AddFact(string name, float value)
         {
             if (GetFact(name) == null)
             {
@@ -125,7 +125,7 @@ namespace Unity.GOAP.World
         }
     }
 
-    public sealed class CWorld : MonoBehaviour
+    public sealed class CWorld 
     {
         private static readonly CWorld instance = new CWorld();
         private static CFactManager factManager;

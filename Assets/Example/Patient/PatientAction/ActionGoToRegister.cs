@@ -7,7 +7,7 @@ using Unity.GOAP.Agent;
 
 public class ActionGoToRegister : CActionBase
 {
-    public override bool Pre_Perform(CAgent agent)
+    public override bool Pre_Perform()
     {
         GameObject target = GameObject.FindWithTag("Reception");
         if (target == null)
@@ -18,7 +18,7 @@ public class ActionGoToRegister : CActionBase
         return true;
     }
 
-    public override bool PerformAction(CAgent agent)
+    public override bool PerformAction()
     {
         Patient patient = (Patient)agent;
         patient.Move();
@@ -27,7 +27,7 @@ public class ActionGoToRegister : CActionBase
         return true;
     }
 
-    public override bool HasCompleted(CAgent agent)
+    public override bool HasCompleted()
     {
         Patient patient = (Patient)agent;
         if (patient.navAgent.remainingDistance < 2f)
@@ -37,10 +37,10 @@ public class ActionGoToRegister : CActionBase
         return false;
     }
 
-    public override bool HasFailed(CAgent agent)
+    public override bool HasFailed()
     {
         Patient patient = (Patient)agent;
-        if (HasCompleted(agent))
+        if (HasCompleted())
         {
             return false;
         }
@@ -53,7 +53,7 @@ public class ActionGoToRegister : CActionBase
     }
 
     float timer = 0f;
-    public override bool Pos_Perform(CAgent agent)
+    public override bool Pos_Perform()
     {
         timer = timer + Time.deltaTime;
         this.isActive = true;

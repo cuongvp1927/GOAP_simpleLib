@@ -6,34 +6,36 @@ using Unity.GOAP.Agent;
 using Unity.GOAP.World;
 public class Eating : CActionBase
 {
-    public Eating() : base()
+    float timer;
+    [SerializeField] float eatTime = 1f;
+
+    public override bool Pre_Perform()
     {
-        this.actionName = "Eating";
-    }
-    public override bool Pre_Perform(CAgent agent)
-    {
-        return base.Pre_Perform(agent);
+        timer = 0;
+        return base.Pre_Perform();
     }
 
-    public override bool PerformAction(CAgent agent)
+    public override bool PerformAction()
     {
-        return base.PerformAction(agent);
+        return base.PerformAction();
     }
 
-    public override bool Pos_Perform(CAgent agent)
+    public override bool Pos_Perform()
     {
-        return base.Pos_Perform(agent);
+        return base.Pos_Perform();
     }
-    public override bool HasCompleted(CAgent agent)
+    public override bool HasCompleted()
     {
-        if (CWorld.Instance.GetFacts().GetFact("eatingTime").value == 0)
+        timer += Time.deltaTime;
+        if (timer >= eatTime)
         {
             return true;
         }
+
         return false;
     }
 
-    public override bool HasFailed(CAgent agent)
+    public override bool HasFailed()
     {
         return false;
     }

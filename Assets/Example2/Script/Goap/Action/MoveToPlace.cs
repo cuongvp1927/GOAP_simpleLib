@@ -15,7 +15,7 @@ public class MoveToPlace : CActionBase
         this.actionName = "MoveToPlace";
     }
 
-    public override bool Pre_Perform(CAgent agent)
+    public override bool Pre_Perform()
     {
         AllLocationInfor infor = AllLocationInfor.Instance;
         LocationInformation loc = infor.infos.Find(e => e.codeName.Equals(location));
@@ -37,7 +37,7 @@ public class MoveToPlace : CActionBase
         return false;
     }
 
-    public override bool PerformAction(CAgent agent)
+    public override bool PerformAction()
     {
         _navMeshAgent = agent.gameObject.GetComponent<NavMeshAgent>();
         _navMeshAgent.SetDestination(agent.position3D);
@@ -45,11 +45,11 @@ public class MoveToPlace : CActionBase
         return true;
     }
 
-    public override bool Pos_Perform(CAgent agent)
+    public override bool Pos_Perform()
     {
-        return base.Pos_Perform(agent);
+        return base.Pos_Perform();
     }
-    public override bool HasCompleted(CAgent agent)
+    public override bool HasCompleted()
     {
         if (_navMeshAgent.pathPending)
         {
@@ -65,10 +65,10 @@ public class MoveToPlace : CActionBase
         return false;
     }
 
-    public override bool HasFailed(CAgent agent)
+    public override bool HasFailed()
     {
 
-        if (HasCompleted(agent))
+        if (HasCompleted())
         {
             return false;
         }

@@ -55,6 +55,7 @@ public class GameController : MonoBehaviour
             i -= 1;
          }
       }
+      CameraController.Instance.GetAllCam();
    }
    
 }

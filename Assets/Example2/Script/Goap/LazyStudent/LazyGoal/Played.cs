@@ -7,23 +7,20 @@ using Unity.GOAP.Agent;
 
 public class Played : CGoal
 {
-    public override void OnStart(CAgent agent)
+    LazyStudentSecVer student;
+    public override void Initiate(CAgent a)
     {
-        base.OnStart(agent);
+        base.Initiate(a);
+        student = (LazyStudentSecVer)a;
+    }
+
+    public override void OnStart()
+    {
+        base.OnStart();
         Debug.Log(this.important);
     }
-    public override void OnComplete(CAgent agent)
+    public override void OnComplete()
     {
-        base.OnComplete(agent);
-        //try
-        //{
-
-        //    LazyStudentSecVer student = (LazyStudentSecVer)agent;
-        //    student.ResetBoredom();
-        //}
-        //catch (System.MissingMethodException e)
-        //{
-        //    Debug.LogError("No method ResetBoredom in object "+  agent.agentName);
-        //}
+        base.OnComplete();
     }
 }

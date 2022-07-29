@@ -7,22 +7,22 @@ using Unity.GOAP.Agent;
 
 public class Ate : CGoal
 {
-    public override void OnStart(CAgent agent)
+    IAgentExp2 student;
+    public override void Initiate(CAgent a)
     {
-        base.OnStart(agent);
+        base.Initiate(a);
+        student = (IAgentExp2)a;
+    }
+
+    public override void OnStart()
+    {
+        base.OnStart();
         Debug.Log(this.important);
     }
-    public override void OnComplete(CAgent agent)
+    public override void OnComplete()
     {
-        base.OnComplete(agent);
-        try
-        {
-            LazyStudentSecVer student = (LazyStudentSecVer)agent;
-            student.ResetHunger();
-        }
-        catch (System.MissingMethodException e)
-        {
-            Debug.LogError("No method ResetBoredom in object " + agent.agentName);
-        }
+        base.OnComplete();
+        
+        student.ResetHunger();
     }
 }

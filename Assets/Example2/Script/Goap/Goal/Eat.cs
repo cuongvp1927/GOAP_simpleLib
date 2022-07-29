@@ -3,11 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Unity.GOAP.Goal;
+using Unity.GOAP.Agent;
+
 public class Eat : CGoal
 {
-    public Eat() : base()
+    IAgentExp2 worker;
+    public override void Initiate(CAgent a)
     {
-        this.goalName = "Eat";
+        worker = (IAgentExp2)a;
+        base.Initiate(a);
+    }
+
+    public override void OnComplete()
+    {
+        base.OnComplete();
+        worker.ResetHunger();
     }
 }
 

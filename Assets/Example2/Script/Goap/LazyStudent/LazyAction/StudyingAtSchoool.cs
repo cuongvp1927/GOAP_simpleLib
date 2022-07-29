@@ -8,22 +8,22 @@ using Unity.GOAP.ActionBase;
 public class StudyingAtSchoool : CActionBase
 {
 
-    public override bool Pre_Perform(CAgent agent)
+    public override bool Pre_Perform()
     {
         return true;
     }
 
-    public override bool PerformAction(CAgent agent)
+    public override bool PerformAction()
     {
         isActive = true;
         return true;
     }
 
-    public override bool Pos_Perform(CAgent agent)
+    public override bool Pos_Perform()
     {
-        return base.Pos_Perform(agent);
+        return base.Pos_Perform();
     }
-    public override bool HasCompleted(CAgent agent)
+    public override bool HasCompleted()
     {
 
         if (agent.agentFact.GetFact("FreeTime").value ==1)
@@ -34,7 +34,7 @@ public class StudyingAtSchoool : CActionBase
         return false;
     }
 
-    public override bool HasFailed(CAgent agent)
+    public override bool HasFailed()
     {
         return false;
     }

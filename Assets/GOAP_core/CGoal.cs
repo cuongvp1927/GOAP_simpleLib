@@ -17,25 +17,28 @@ namespace Unity.GOAP.Goal
 
         public CFactManager goals;
 
+        protected CAgent agent;
+
         public CGoal() : base()
         {
             this.goalName = this.GetType().Name;
         }
-        
-        public virtual void Initiate()
+
+        public virtual void Initiate(CAgent a)
         {
             goals = new CFactManager(goalList);
+            this.agent = a;
         }
 
         // Function called on starting the goal
-        public virtual void OnStart(CAgent agent)
+        public virtual void OnStart()
         {
             Debug.Log("Agent: " + agent.agentName + " start for goal: " + this.goalName);
             return;
         }
 
         // Function called on completing the goal
-        public virtual void OnComplete(CAgent agent)
+        public virtual void OnComplete()
         {
             Debug.Log("Agent: " + agent.agentName + " complete Goal: " + this.goalName);
             return;

@@ -39,10 +39,6 @@ namespace Unity.GOAP.Agent
 
         protected virtual void Awake()
         {
-        }
-
-        protected virtual void Start()
-        {
             agentFact = new CFactManager();
 
             actionList = new List<CActionBase>();
@@ -50,15 +46,19 @@ namespace Unity.GOAP.Agent
 
             foreach (CActionBase a in agentView.actions)
             {
-                a.Initiate();
+                a.Initiate(this);
                 actionList.Add(a);
             }
 
             foreach (CGoal g in agentView.goals)
             {
-                g.Initiate();
+                g.Initiate(this);
                 goalList.Add(g);
             }
+        }
+
+        protected virtual void Start()
+        {
 
         }
 
@@ -106,11 +106,14 @@ namespace Unity.GOAP.Agent
 
         protected void InterruptCurrentAction()
         {
-            if (currentAction.isInteruptable)
+            if (currentAction != null)
             {
-                this.currentAction = null;
-                this.currentGoal = null;
-                this.GetAGoal();
+                if (currentAction.isInteruptable)
+                {
+                    goalList.Remove(currentGoal);
+                    BlackListingGoal(currentGoal);
+                    this.GetAGoal();
+                }
             }
         }
 
@@ -152,7 +155,7 @@ namespace Unity.GOAP.Agent
                 if (actionQueue != null)
                 {
                     currentGoal = g;
-                    currentGoal.OnStart(this);
+                    currentGoal.OnStart();
                     break;
                 }
             }
@@ -163,17 +166,17 @@ namespace Unity.GOAP.Agent
         protected virtual void PerformAction(CActionBase action) 
         {
             // If the action is performable by checking Pre_performing calculation, default always return true
-            if (currentAction.Pre_Perform(this))
+            if (currentAction.Pre_Perform())
             {
                 Debug.Log("Agent: " + agentName + " currently performing: " + currentAction.actionName);
                 currentAction.isActive = true;
-                currentAction.PerformAction(this);
+                currentAction.PerformAction();
             }
             // If checking Pre_performing false, meaning the action is unable to perform for some reason, temporary remove 
             // the goal and re-plan.
             else
             {
-                currentAction.OnFail(this);
+                currentAction.OnFail();
                 goalList.Remove(currentGoal);
                 BlackListingGoal(currentGoal);
                 GetAGoal();
@@ -198,9 +201,9 @@ namespace Unity.GOAP.Agent
             {
                 // If durring perfoming action, things happen that cause the action to fail, temporary remove 
                 // the goal and re-plan.
-                if (currentAction.HasFailed(this))
+                if (currentAction.HasFailed())
                 {
-                    currentAction.OnFail(this);
+                    currentAction.OnFail();
 
                     foreach (CGoal g in goalList)
                     {
@@ -220,11 +223,11 @@ namespace Unity.GOAP.Agent
                 }
 
                 // Check if the current action has complete yet?
-                if (currentAction.HasCompleted(this))
+                if (currentAction.HasCompleted())
                 {
                     // Do pos calculation and switch to the next action
                     currentAction.isActive = false;
-                    currentAction.Pos_Perform(this);
+                    currentAction.Pos_Perform();
                     if (currentAction.forceReplan == true)
                     {
                         GetAGoal();
@@ -258,7 +261,7 @@ namespace Unity.GOAP.Agent
                     // checking the completation of the goal.
                     if (actionQueue.Count <= 0)
                     {
-                        currentGoal.OnComplete(this);
+                        currentGoal.OnComplete();
                         // If goal is satisfied and non repeat, remove from the goal list
                         if (currentGoal.deletable)
                         {
