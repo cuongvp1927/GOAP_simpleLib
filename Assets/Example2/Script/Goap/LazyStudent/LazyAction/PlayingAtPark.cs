@@ -9,20 +9,21 @@ public class PlayingAtPark : CActionBase
 {
     float timer = 0;
     [SerializeField] float playTime = 5f;
-    LazyStudentSecVer student;
+    IAgentExp2 student;
 
     public override void Initiate(CAgent a)
     {
         base.Initiate(a);
-        student = (LazyStudentSecVer)agent;
+        student = (IAgentExp2)agent;
     }
     public override bool Pre_Perform()
     {
         timer = 0;
-        if (student.agentFact.GetFact("FreeTime").value != 1)
-        {
-            student.IncreaseSkipCounter();
-        }
+        //if ((agent.agentFact.GetFact("MorningStudyTime").value == 1) ||
+        //    (agent.agentFact.GetFact("AfternoonStudyTime").value == 1))
+        //{
+        //    student.IncSkipCounter();
+        //}
 
         return true;
     }
@@ -39,6 +40,12 @@ public class PlayingAtPark : CActionBase
     }
     public override bool HasCompleted()
     {
+        if ((agent.agentFact.GetFact("MorningStudyTime").value == 1) ||
+            (agent.agentFact.GetFact("AfternoonStudyTime").value == 1))
+        {
+            student.IncSkipCounter();
+        }
+
         timer += Time.deltaTime;
         if (timer >= playTime)
         {

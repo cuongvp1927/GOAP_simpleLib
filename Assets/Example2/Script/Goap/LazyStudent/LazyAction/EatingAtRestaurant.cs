@@ -7,10 +7,12 @@ using Unity.GOAP.ActionBase;
 
 public class EatingAtRestaurant : CActionBase
 {
+    IAgentExp2 student;
     float timer = 0f;
     [SerializeField] float eatTime = 2f;
     public override bool Pre_Perform()
     {
+        student = (IAgentExp2)agent;
         timer = 0;
         return true;
     }
@@ -32,6 +34,13 @@ public class EatingAtRestaurant : CActionBase
         {
             return true;
         }
+
+        if ((agent.agentFact.GetFact("MorningStudyTime").value == 1) ||
+            (agent.agentFact.GetFact("AfternoonStudyTime").value == 1))
+        {
+            student.IncSkipCounter();
+        }
+
         return false;
     }
 

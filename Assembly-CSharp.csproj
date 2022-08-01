@@ -8,7 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{A7FC064F-7E6A-895B-1D9F-59A60803C908}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -63,6 +64,7 @@
     <Compile Include="Assets\Example\Nurse\NurseAction\ActionGetPatient.cs" />
     <Compile Include="Assets\Example2\Script\Goap\Goal\WorkNightShift.cs" />
     <Compile Include="Assets\Example2\Script\Goap\LazyStudent\LazyGoal\Studied.cs" />
+    <Compile Include="Assets\Example2\Script\Goap\LazyStudent\LazyAction\StudyingExtraClass.cs" />
     <Compile Include="Assets\Example2\Script\Goap\Goal\WorkWeekend.cs" />
     <Compile Include="Assets\Example2\Script\Goap\IAgentExp2.cs" />
     <Compile Include="Assets\Example2\Script\Goap\Goal\StudyExtraClass.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="Assets\Example2\Script\Goap\Action\MoveToPlace.cs" />
     <Compile Include="Assets\Example\utility\Spawner.cs" />
     <Compile Include="Assets\Example2\Script\Goap\LazyStudent\LazyAction\GoToHome.cs" />
+    <Compile Include="Assets\Example2\Script\Goap\LazyStudent\LazyGoal\StudiedExtra.cs" />
     <Compile Include="Assets\GOAP_core\CGoal.cs" />
     <Compile Include="Assets\Example2\Script\GameController\Clock.cs" />
     <Compile Include="Assets\Example2\Script\Goap\LazyStudent\LazyAction\GoToPark.cs" />
@@ -121,7 +124,6 @@
     <Compile Include="Assets\Example2\Script\Goap\Goal\Sleep.cs" />
     <Compile Include="Assets\Example2\Script\Goap\Action\WorkingAtNight.cs" />
     <Compile Include="Assets\Example2\Script\Goap\Chief\Chief.cs" />
-    <Compile Include="Assets\GOAP_core\WorldStates.cs" />
     <Compile Include="Assets\Example2\Script\Goap\LazyStudent\LazyAction\GoToSchool.cs" />
     <Compile Include="Assets\Example2\Script\Goap\Goal\PlayAtWend.cs" />
     <Compile Include="Assets\Example\Patient\PatientAction\ActionGoToWaitingArea.cs" />

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guid: d6ffee3ab06f09448be16c2fea05f800
   position: {x: 520.8, y: -18.399994}
-  important: 50
+  important: 0
   goalName: PlayAtThePark
   deletable: 0
   goalList:
@@ -74,13 +74,14 @@ MonoBehaviour:
   - name: eatingTime
     value: 1
   Effects:
-  - name: chiefWork
+  - name: worked
     value: 1
   agentEffects: []
   worldEffects: []
   isActive: 0
   forceReplan: 0
-  childiren: []
+  childiren:
+  - {fileID: 6581450365059029894}
   workTime: 10
 --- !u!114 &-1368895690446590393
 MonoBehaviour:
@@ -126,7 +127,7 @@ MonoBehaviour:
   m_Name: MoveToPlace
   m_EditorClassIdentifier: 
   guid: f265040eb3ecb0a4180682791e262916
-  position: {x: 0.00012703284, y: 255.99998}
+  position: {x: -0.0000049070077, y: 255.99998}
   cost: 1
   actionName: MoveToPlace
   isInteruptable: 1
@@ -136,7 +137,7 @@ MonoBehaviour:
   - name: atLocWork
     value: 1
   worldEffects: []
-  isActive: 0
+  isActive: 1
   forceReplan: 0
   childiren:
   - {fileID: 837050157678207200}
@@ -182,12 +183,18 @@ MonoBehaviour:
   m_Name: WorkingInMorning
   m_EditorClassIdentifier: 
   guid: 514e4e82ede58464c927651c69bcf229
-  position: {x: 222.05391, y: 112.00009}
+  position: {x: 222.40001, y: 110.47911}
   cost: 1
   actionName: WorkingInMorning
   isInteruptable: 1
-  PreConditions: []
-  Effects: []
+  PreConditions:
+  - name: morningShift
+    value: 1
+  - name: atLocWork
+    value: 1
+  Effects:
+  - name: worked
+    value: 1
   agentEffects: []
   worldEffects: []
   isActive: 0
@@ -269,7 +276,9 @@ MonoBehaviour:
   important: 75
   goalName: Work
   deletable: 0
-  goalList: []
+  goalList:
+  - name: worked
+    value: 1
 --- !u!114 &7276345199662765919
 MonoBehaviour:
   m_ObjectHideFlags: 0

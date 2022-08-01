@@ -17,7 +17,6 @@ public class Ate : CGoal
     public override void OnStart()
     {
         base.OnStart();
-        Debug.Log(this.important);
     }
     public override void OnComplete()
     {

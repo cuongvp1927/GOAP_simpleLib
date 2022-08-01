@@ -37,7 +37,11 @@ public class Policeman : CAgent, IAgentExp2
         this.UpdateGoalImportant("Eat", this.hunger);
     }
 
-    void IAgentExp2.IncreaseSkipCounter()
+    void IAgentExp2.ResetSkipCounter()
+    {
+        Debug.LogError("this agent does not skip work");
+    }
+    void IAgentExp2.IncSkipCounter()
     {
         Debug.LogError("this agent does not skip work");
     }

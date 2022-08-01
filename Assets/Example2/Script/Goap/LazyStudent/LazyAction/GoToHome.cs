@@ -9,12 +9,12 @@ using Unity.GOAP.ActionBase;
 public class GoToHome : CActionBase
 {
     private NavMeshAgent _navMeshAgent;
-
+    IAgentExp2 student;
     public override bool Pre_Perform()
     {
         AllLocationInfor infor = AllLocationInfor.Instance;
         LocationInformation loc = infor.infos.Find(e => e.codeName.Equals("Home1"));
-
+        student = (IAgentExp2)agent;
 
         if (loc != null)
         {
@@ -54,6 +54,12 @@ public class GoToHome : CActionBase
         {
 
             return true;
+        }
+
+        if ((agent.agentFact.GetFact("MorningStudyTime").value == 1) ||
+            (agent.agentFact.GetFact("AfternoonStudyTime").value == 1))
+        {
+            student.IncSkipCounter();
         }
 
         return false;

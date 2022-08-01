@@ -7,7 +7,7 @@ using Unity.GOAP.ActionBase;
 
 public class StudyingAtSchoool : CActionBase
 {
-
+    [SerializeField] bool isMorningStudy=true;
     public override bool Pre_Perform()
     {
         return true;
@@ -25,10 +25,19 @@ public class StudyingAtSchoool : CActionBase
     }
     public override bool HasCompleted()
     {
-
-        if (agent.agentFact.GetFact("FreeTime").value ==1)
+        if (isMorningStudy)
         {
-            return true;
+            if (agent.agentFact.GetFact("MorningStudyTime").value != 1)
+            {
+                return true;
+            }
+        }
+        else
+        {
+            if (agent.agentFact.GetFact("AfternoonStudyTime").value != 1)
+            {
+                return true;
+            }
         }
 
         return false;

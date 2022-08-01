@@ -7,9 +7,10 @@ using Unity.GOAP.ActionBase;
 
 public class SleepingAtHome : CActionBase
 {
-
+    IAgentExp2 student;
     public override bool Pre_Perform()
     {
+        student = (IAgentExp2)agent;
         return true;
     }
 
@@ -29,6 +30,13 @@ public class SleepingAtHome : CActionBase
         {
             return true;
         }
+
+        if ((agent.agentFact.GetFact("MorningStudyTime").value == 1) ||
+            (agent.agentFact.GetFact("AfternoonStudyTime").value == 1))
+        {
+            student.IncSkipCounter();
+        }
+
         return false;
     }
 

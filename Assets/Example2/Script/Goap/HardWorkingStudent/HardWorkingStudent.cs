@@ -13,7 +13,6 @@ public class HardWorkingStudent : CAgent, IAgentExp2
     [SerializeField] private int hungerIncPerSec = 10;
     [SerializeField] private int boredomIncPerSec = 10;
 
-
     protected override void Start()
     {
         base.Start();
@@ -26,7 +25,10 @@ public class HardWorkingStudent : CAgent, IAgentExp2
         this.UpdateGoalImportant("PlayAtThePark", this.boredom);
     }
 
-
+    void IAgentExp2.IncSkipCounter()
+    {
+        Debug.LogError("this agent does not skip work");
+    }
     void IAgentExp2.ResetBoredom()
     {
         boredom = 0;
@@ -41,7 +43,7 @@ public class HardWorkingStudent : CAgent, IAgentExp2
     {
         Debug.Log("This Agent does not earn money");
     }
-    void IAgentExp2.IncreaseSkipCounter()
+    void IAgentExp2.ResetSkipCounter()
     {
         Debug.Log("This Agent does not skip school");
     }

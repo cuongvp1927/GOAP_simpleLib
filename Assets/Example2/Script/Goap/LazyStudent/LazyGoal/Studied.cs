@@ -10,6 +10,5 @@ public class Studied : CGoal
     public override void OnStart()
     {
         base.OnStart();
-        Debug.Log(this.important);
     }
 }

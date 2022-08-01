@@ -7,5 +7,6 @@ public interface IAgentExp2
     public void ResetHunger();
     public void ResetBoredom();
     public void EarnMoney(int amount);
-    public void IncreaseSkipCounter();
+    public void ResetSkipCounter();
+    public void IncSkipCounter();
 }

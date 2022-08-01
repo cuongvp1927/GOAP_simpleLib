@@ -33,8 +33,11 @@ public class WorkerAgent : CAgent, IAgentExp2
     {
         this.money += moneyIncPerShift + extra;
     }
-    
 
+    void IAgentExp2.IncSkipCounter()
+    {
+        Debug.LogError("this agent does not skip work");
+    }
     void IAgentExp2.ResetBoredom()
     {
         Debug.Log("This agent does not have a soul to enjoy life anymore");
@@ -46,7 +49,7 @@ public class WorkerAgent : CAgent, IAgentExp2
         this.UpdateGoalImportant("Eat", this.hunger);
     }
 
-    void IAgentExp2.IncreaseSkipCounter()
+    void IAgentExp2.ResetSkipCounter()
     {
         Debug.LogError("this agent does not skip work");
     }

@@ -743,10 +743,11 @@ MonoBehaviour:
   goalBlacklist: []
   position3D: {x: 0, y: 0, z: 0}
   agentView: {fileID: 11400000, guid: d4f442aa195fc2d4da0e0a3068246b14, type: 2}
-  hungerIncPerSec: 20
+  hungerIncPerSec: 10
   boredomIncPerSec: 20
   studyTimeMorning: 5
   studyTimeAfternoon: 13
+  extraStudyTime: 17
 --- !u!1 &3433867272663679396
 GameObject:
   m_ObjectHideFlags: 0

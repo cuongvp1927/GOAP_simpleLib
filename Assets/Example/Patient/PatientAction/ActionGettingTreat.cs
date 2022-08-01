@@ -33,7 +33,7 @@ public class ActionGettingTreat : CActionBase
     float timer = 0f;
     public override bool Pos_Perform()
     {
-        timer = timer + Time.deltaTime;
+        timer += Time.deltaTime;
         this.isActive = true;
         if (timer >= 5f)
         {
