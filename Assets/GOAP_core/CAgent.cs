@@ -29,7 +29,8 @@ namespace Unity.GOAP.Agent
         protected CGoal currentGoal;
 
         [SerializeField] protected AgentView agentView;
-
+        [SerializeField] protected GameObject visual;
+        
         protected CPlanner planner;
 
         public CAgent() : base()
@@ -287,6 +288,11 @@ namespace Unity.GOAP.Agent
                 }
             }
 
+        }
+
+        public void ShowVisual(bool show = true)
+        {
+            visual.SetActive(show);
         }
     }
 
