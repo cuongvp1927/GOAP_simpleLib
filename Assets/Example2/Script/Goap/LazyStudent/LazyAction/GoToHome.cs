@@ -52,7 +52,6 @@ public class GoToHome : CActionBase
 
         if ((_navMeshAgent.remainingDistance <= 1f))
         {
-
             return true;
         }
 

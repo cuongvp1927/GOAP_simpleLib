@@ -30,6 +30,14 @@ namespace Unity.GOAP.Goal
             this.agent = a;
         }
 
+        public virtual CGoal Clone(CAgent a)
+        {
+            CGoal clone = (CGoal)MemberwiseClone();
+            clone.agent = a;
+            clone.goals = new CFactManager(goalList);
+            return clone;
+        }
+
         // Function called on starting the goal
         public virtual void OnStart()
         {

@@ -61,6 +61,37 @@ namespace Unity.GOAP.ActionBase {
             this.agent = a;
         }
 
+        public virtual CActionBase Clone(CAgent a)
+        {
+            CActionBase clone = (CActionBase)this.MemberwiseClone();
+            clone.cost = this.cost;
+            clone.actionName = this.actionName;
+
+            clone.agent = a;
+
+            clone.preconditions = new CFactManager();
+            clone.effects = new CFactManager();
+
+            foreach (CFact f in PreConditions)
+            {
+                clone.preconditions.AddFact(f.name, f.value);
+            }
+
+            foreach (CFact f2 in Effects)
+            {
+                clone.effects.AddFact(f2.name, f2.value);
+            }
+            foreach (CFact f2 in agentEffects)
+            {
+                clone.effects.AddFact(f2.name, f2.value);
+            }
+            foreach (CFact f2 in worldEffects)
+            {
+                clone.effects.AddFact(f2.name, f2.value);
+            }
+            return clone;
+        }
+
         // Check complete, required
         public virtual bool HasCompleted()
         {
