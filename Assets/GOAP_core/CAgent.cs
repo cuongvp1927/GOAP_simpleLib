@@ -45,6 +45,7 @@ namespace Unity.GOAP.Agent
             actionList = new List<CActionBase>();
             goalList = new List<CGoal>();
 
+            Debug.Log("action id of all action:");
             foreach (CActionBase a in agentView.actions)
             {
                 a.Initiate(this);

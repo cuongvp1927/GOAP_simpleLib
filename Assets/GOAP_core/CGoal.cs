@@ -34,7 +34,8 @@ namespace Unity.GOAP.Goal
         {
             CGoal clone = (CGoal)this.MemberwiseClone();
             goals = new CFactManager(goalList);
-            this.agent = a;
+            clone.agent = a;
+            clone.goals = new CFactManager(goalList);
             return clone;
         }
 

@@ -87,7 +87,10 @@ namespace Unity.GOAP.ActionBase {
             {
                 clone.effects.AddFact(f2.name, f2.value);
             }
+<<<<<<< HEAD
 
+=======
+>>>>>>> fd3f0ea (fix reusing same action)
             return clone;
         }
 
