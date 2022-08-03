@@ -20,6 +20,7 @@ public class GoToPark : CActionBase
         {
             agent.position3D = loc.obj.transform.position;
             agent.agentFact.RemoveContains("atLoc");
+            agent.ShowVisual(true);
 
             return true;
         }

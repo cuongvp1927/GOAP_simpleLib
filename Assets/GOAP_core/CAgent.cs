@@ -51,7 +51,6 @@ namespace Unity.GOAP.Agent
                 CActionBase act = (CActionBase)a.Clone(this);
                 //a.Initiate(this);
                 actionList.Add(act);
-                Debug.Log(act.GetInstanceID());
             }
 
             foreach (CGoal g in agentView.goals)

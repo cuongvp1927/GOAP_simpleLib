@@ -7,11 +7,9 @@ using Unity.GOAP.Agent;
 
 public class Ate : CGoal
 {
-    IAgentExp2 student;
     public override void Initiate(CAgent a)
     {
         base.Initiate(a);
-        student = (IAgentExp2)a;
     }
 
     public override void OnStart()
@@ -22,6 +20,8 @@ public class Ate : CGoal
     {
         base.OnComplete();
         
+        IAgentExp2 student;
+        student = (IAgentExp2)agent;
         student.ResetHunger();
     }
 }

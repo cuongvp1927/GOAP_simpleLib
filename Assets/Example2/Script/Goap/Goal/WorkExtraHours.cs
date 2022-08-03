@@ -6,16 +6,15 @@ using Unity.GOAP.Goal;
 using Unity.GOAP.Agent;
 public class WorkExtraHours : CGoal
 {
-    IAgentExp2 worker;
     public override void Initiate(CAgent a)
     {
         base.Initiate(a);
-        worker = (IAgentExp2)a;
     }
 
     public override void OnComplete()
     {
         base.OnComplete();
+        IAgentExp2 worker = (IAgentExp2)agent;
         worker.EarnMoney(0);
     }
 }
