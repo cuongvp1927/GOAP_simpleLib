@@ -9,6 +9,7 @@ public class Eat : CGoal
 {
     IAgentExp2 worker;
 
+
     public override void OnComplete()
     {
         base.OnComplete();

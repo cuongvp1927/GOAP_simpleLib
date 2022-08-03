@@ -11,7 +11,6 @@ public class Ate : CGoal
     public override void OnComplete()
     {
         base.OnComplete();
-
         student = (IAgentExp2)agent;
         student.ResetHunger();
     }

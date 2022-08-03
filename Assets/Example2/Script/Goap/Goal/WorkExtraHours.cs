@@ -11,6 +11,7 @@ public class WorkExtraHours : CGoal
     public override void OnComplete()
     {
         base.OnComplete();
+
         worker = (IAgentExp2)agent;
         worker.EarnMoney(0);
     }
