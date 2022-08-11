@@ -47,13 +47,15 @@ namespace Unity.GOAP.Agent
             foreach (CActionBase a in agentView.actions)
             {
                 a.Initiate(this);
-                actionList.Add(a);
+                CActionBase act =  a.Clone(this);
+                actionList.Add(act);
             }
 
             foreach (CGoal g in agentView.goals)
             {
                 g.Initiate(this);
-                goalList.Add(g);
+                CGoal goal = g.Clone(this);
+                goalList.Add(goal);
             }
         }
 

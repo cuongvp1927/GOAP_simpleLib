@@ -4,6 +4,7 @@ using UnityEngine;
 
 using Unity.GOAP.World;
 using Unity.GOAP.Agent;
+
 namespace Unity.GOAP.ActionBase {
     public class CActionBase : Node
     {
@@ -59,6 +60,35 @@ namespace Unity.GOAP.ActionBase {
             }
 
             this.agent = a;
+        }
+
+        public virtual CActionBase Clone(CAgent a)
+        {
+            CActionBase clone = (CActionBase)this.MemberwiseClone();
+            clone.agent = a;
+
+            clone.preconditions = new CFactManager();
+            clone.effects = new CFactManager();
+
+            foreach (CFact f in PreConditions)
+            {
+                clone.preconditions.AddFact(f.name, f.value);
+            }
+
+            foreach (CFact f2 in Effects)
+            {
+                clone.effects.AddFact(f2.name, f2.value);
+            }
+            foreach (CFact f2 in agentEffects)
+            {
+                clone.effects.AddFact(f2.name, f2.value);
+            }
+            foreach (CFact f2 in worldEffects)
+            {
+                clone.effects.AddFact(f2.name, f2.value);
+            }
+
+            return clone;
         }
 
         // Check complete, required
