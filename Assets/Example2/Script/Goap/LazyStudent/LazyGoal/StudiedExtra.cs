@@ -7,7 +7,6 @@ using Unity.GOAP.Agent;
 
 public class StudiedExtra : CGoal
 {
-<<<<<<< HEAD
     IAgentExp2 student;
 
     public override void OnComplete()

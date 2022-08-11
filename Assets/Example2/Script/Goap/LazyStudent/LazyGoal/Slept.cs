@@ -11,7 +11,6 @@ public class Slept : CGoal
     {
         base.OnComplete();
         student = (IAgentExp2)agent;
-
         student.ResetBoredom();
     }
 }

@@ -7,6 +7,7 @@ using Unity.GOAP.Agent;
 
 public class Played : CGoal
 {
+
     LazyStudentSecVer student;
     public override void OnComplete()
     {

@@ -2448,7 +2448,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patientPrefab: {fileID: 3074418086553501365, guid: 307c49a02065d2e419f1060006b9ed26, type: 3}
   numPatients: 1
+<<<<<<< HEAD
   maxPatients: 5
+=======
+  maxPatients: 1
+>>>>>>> 7113e9371892c0d40c4908bdd96581a45eaaceca
 --- !u!4 &1445562789
 Transform:
   m_ObjectHideFlags: 0

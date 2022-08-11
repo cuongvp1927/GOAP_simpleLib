@@ -7,8 +7,8 @@ using Unity.GOAP.Agent;
 
 public class Eat : CGoal
 {
-    IAgentExp2 worker;
 
+    IAgentExp2 worker;
 
     public override void OnComplete()
     {

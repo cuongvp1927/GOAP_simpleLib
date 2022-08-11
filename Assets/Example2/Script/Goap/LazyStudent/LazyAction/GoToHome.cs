@@ -54,7 +54,7 @@ public class GoToHome : CActionBase
 
         if ((_navMeshAgent.remainingDistance <= 1f))
         {
-            Debug.Log(_navMeshAgent.remainingDistance);
+            //Debug.Log(_navMeshAgent.remainingDistance);
             return true;
         }
 
