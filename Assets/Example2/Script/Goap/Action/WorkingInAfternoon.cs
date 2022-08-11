@@ -38,5 +38,4 @@ public class WorkingInAfternoon : CActionBase
         return false;
     }
 
-
 }

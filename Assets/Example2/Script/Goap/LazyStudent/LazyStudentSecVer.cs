@@ -199,17 +199,6 @@ public class LazyStudentSecVer : CAgent, IAgentExp2
                         this.InterruptCurrentAction();
                     }
                 }
-
-                //if ((agentFact.GetFact("MorningStudyTime").value == 1) ||
-                //    (agentFact.GetFact("AfternoonStudyTime").value == 1))
-                //{
-                //    if (currentAction != null && currentGoal.goalName.Contains("Play") && chkCounter)
-                //    {
-                //        chkCounter = false;
-                //        skipCounter += 1;
-                //        Debug.Log("Student skip class " + skipCounter + " times, at " + hour + " o'clock");
-                //    }
-                //}
             }
 
         }

@@ -20,7 +20,7 @@ public class GoToPark : CActionBase
         {
             agent.position3D = loc.obj.transform.position;
             agent.agentFact.RemoveContains("atLoc");
-            agent.ShowVisual(true);
+            //agent.ShowVisual(true);
 
             return true;
         }
@@ -54,6 +54,7 @@ public class GoToPark : CActionBase
         if ((_navMeshAgent.remainingDistance <= 1f))
         {
 
+            Debug.Log(_navMeshAgent.remainingDistance);
             return true;
         }
 

@@ -659,7 +659,7 @@ GameObject:
   - component: {fileID: -3123098399679570322}
   - component: {fileID: -8755619932695932729}
   m_Layer: 0
-  m_Name: SofiticatedBoy
+  m_Name: LazyStudent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

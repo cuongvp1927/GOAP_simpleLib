@@ -26,14 +26,13 @@ public class MoveToPlace : CActionBase
             agent.position3D = loc.obj.transform.position;
             agent.agentFact.RemoveContains("atLoc");
             
-            agent.ShowVisual(true);
+            //agent.ShowVisual(true);
 
             return true;
         }
 
         var index = infor.infos.IndexOf(loc);
         agent.agentFact.ChangeFact("CurrentLocation", index);
-        Debug.Log(index);
 
         Debug.LogError("Can not find position of the location: "+ location);
         return false;
@@ -49,10 +48,10 @@ public class MoveToPlace : CActionBase
 
     public override bool Pos_Perform()
     {
-        if (!location.Contains("Park"))
-        {
-            agent.ShowVisual(false);
-        }
+        //if (!location.Contains("Park"))
+        //{
+        //    agent.ShowVisual(false);
+        //}
         return base.Pos_Perform();
     }
     public override bool HasCompleted()

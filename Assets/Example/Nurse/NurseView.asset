@@ -16,7 +16,7 @@ MonoBehaviour:
   position: {x: 472.99203, y: -0.0000027969363}
   important: 10
   goalName: GoalTreatPatient
-  deletable: 1
+  deletable: 0
   goalList:
   - name: treatedPatient
     value: 1
@@ -36,7 +36,7 @@ MonoBehaviour:
   position: {x: 472.8, y: 126.40003}
   important: 1
   goalName: GoalIdle
-  deletable: 1
+  deletable: 0
   goalList:
   - name: beingIdle
     value: 1
